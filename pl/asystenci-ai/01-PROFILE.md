@@ -34,13 +34,13 @@ rozwiązuje: „agent, który robi rzeczy, kiedy cię nie ma".
 **Funkcje.**
 - Jedna bramka (*Gateway*) dla kilkunastu kanałów: Discord, Google Chat, iMessage, Matrix, Microsoft Teams, Signal,
   Slack, Telegram, WhatsApp, Zalo, WeChat, Feishu, SMS, e-mail i inne.
-- Automatyzacje: cron, webhooki, wyzwalacze Gmail Pub/Sub i IMAP; **heartbeat** — cykliczna tura agenta.
+- Automatyzacje: cron, webhooki, wyzwalacze Gmail Pub/Sub i IMAP oraz **heartbeat** (cykliczna tura agenta).
 - **Standing orders** („stałe polecenia"): program z zakresem, wyzwalaczem, bramką zatwierdzenia i eskalacją,
   który agent prowadzi bez pytania o każde zadanie.
 - Pamięć w SQLite (słowa kluczowe, wektory, hybryda) i nocne „śnienie" (*dreaming*), które ją konsoliduje.
 - Umiejętności jako foldery `SKILL.md` i rejestr **ClawHub**; wtyczki dla kanałów, dostawców i narzędzi.
-- Głos na Discordzie, „węzły" iOS/Android (kamera, głos), przekaźnik przeglądarki, zespoły agentów, A2A.
-- Wersja 2.0 (v2026.8.1, 30.08.2026): prostszy instalator, nowe UI w przeglądarce, współdzielone sesje w chmurze.
+- Głos na Discordzie, „węzły" iOS/Android, przekaźnik przeglądarki, zespoły agentów, A2A; wersja 2.0 (v2026.8.1,
+  30.08.2026) dodała prostszy instalator, nowe UI w przeglądarce i współdzielone sesje w chmurze.
 
 **Przewaga.**
 - **Dystrybucja i efekt sieci.** Najbardziej „ugwiazdkowane" repozytorium agentowe (391,7k ⭐, API GitHuba
@@ -64,7 +64,7 @@ cron · webhook · IMAP · heartbeat ─────────┼─► Gatewa
 ```
 - **Bramka** jest jedynym źródłem prawdy o sesjach, routingu i kanałach. Nieznany nadawca DM dostaje kod parowania,
   w grupach działają listy dozwolonych i wymóg wzmianki; `openclaw security audit` sprawdza konfigurację.
-- **Zaufanie to właściwość sesji** wyliczana ze źródła wiadomości, a nie flaga przy narzędziu.
+  **Zaufanie to właściwość sesji** wyliczana ze źródła wiadomości, a nie flaga przy narzędziu.
 - **Heartbeat** to zadanie systemowe: domyślnie co 30 min (co 1 h przy OAuth Anthropic) — „periodic agent turns
   in the main session"; wybudzenia zdarzeniami co najmniej 30 s od siebie, blokada po 5 startach w 60 s.
 - **Dreaming**: fazy light, REM i deep w tle; wynik trafia do `DREAMS.md`, a do `MEMORY.md` awansują tylko mocne
@@ -74,9 +74,8 @@ cron · webhook · IMAP · heartbeat ─────────┼─► Gatewa
 - **Piaskownica opcjonalna**: „the workspace is the default cwd, not a hard sandbox" — w 2.0 nadal domyślnie wyłączona.
 - **Modele lokalne**: wtyczka llama.cpp dobierająca przepis do RAM/VRAM, Ollama (natywne `/api/chat`; endpoint `/v1`
   wg dokumentacji „breaks tool calling"), LM Studio, vLLM, MLX, `ds4` dla DeepSeek V4 Flash na Metalu.
-- Bramka, sesje i pliki tożsamości rozebrane w [kursie 2, część 1](../kurs_aplikacje_agentowe/01-ARCHITEKTURY-AGENTOWE.md)
-  i [część 6](../kurs_aplikacje_agentowe/06-TOZSAMOSC-PLIKI-ROBOCZE.md); pułapki z lokalnym modelem —
-  [przegląd harnessów](../harnessy-agentowe/README.md#dlaczego-nie-ma-ich-w-czołówce).
+- Rozbiór bramki i sesji: [kurs 2, część 1](../kurs_aplikacje_agentowe/01-ARCHITEKTURY-AGENTOWE.md); pułapki
+  z lokalnym modelem: [przegląd harnessów](../harnessy-agentowe/README.md#dlaczego-nie-ma-ich-w-czołówce).
 
 **Na czym zarabia.** Sam projekt nie zarabia — zarabiają na nim inni.
 - **Fundacja** (ogłoszona 8.07.2026): amerykańska 501(c)(3), 12 pełnych etatów *(dane fundacji)*. Darczyńcy
@@ -84,11 +83,9 @@ cron · webhook · IMAP · heartbeat ─────────┼─► Gatewa
   („major donor", finansuje też inferencję), NVIDIA, Microsoft, Red Hat, Tencent, Atlassian; infrastruktura od
   Vercel, Cloudflare, GitHub i innych. **Kwot fundacja nie podaje.**
 - **Dystrybucje komercyjne**: Microsoft Autopilot (ewolucja Microsoft Scout, część Copilota; ogłoszony 25.09.2026,
-  prywatny podgląd od końca IX 2026, cena nieznana); NVIDIA NemoClaw (NVIDIA sprzedaje GPU i DGX, oprogramowanie
-  darmowe); usługi Tencent i Z.ai w Chinach (III 2026, *wg prasy*); hosting Cloudflare „Moltworker" (29.01.2026).
-- **OpenClaw Enterprise** (29.09.2026): powstał w OpenAI, przekazany fundacji, rozwijany z Red Hat i NVIDIA,
-  „will always be free" *(dane fundacji)*.
-- **ClawHub**: nie znalazłem płatnych listingów ani podziału przychodów.
+  prywatny podgląd od końca IX 2026, cena nieznana); NVIDIA NemoClaw (NVIDIA sprzedaje GPU i DGX); usługi Tencent
+  i Z.ai w Chinach (III 2026, *wg prasy*). OpenClaw Enterprise (29.09.2026, z OpenAI, Red Hat i NVIDIA) „will always
+  be free" *(dane fundacji)*. W ClawHub nie znalazłem płatnych listingów ani podziału przychodów.
 - Twórca, Peter Steinberger, przeszedł do OpenAI 14–15.02.2026 i prowadzi tam „Claw Labs"; Sam Altman zapowiedział, że
   projekt zostanie w fundacji jako open source wspierany przez OpenAI.
 
@@ -107,10 +104,8 @@ cache ([pułapka H4](../harnessy-agentowe/01-PROFILE.md#siedem-pułapek-wspólny
 - **Zaufanie per sesja:** konsola właściciela — pełne uprawnienia; wiadomość z zewnętrznego kanału — sesja bez
   powłoki i bez akt. Dla zawodów z tajemnicą zawodową to wymaganie, nie opcja.
 - **Heartbeat to zwykła zaplanowana tura** z krótką listą kontrolną i limitami antyspamowymi. Na rigu zarezerwuj
-  jeden z 4 slotów DeepSeek-V4-Flash na heartbeat i cron, żeby tło nie blokowało rozmowy; datę wkładaj do wiadomości,
-  nie do promptu systemowego.
-- **Konsolidacja pamięci w nocy**, gdy wszystkie 4 sloty są wolne: czytelny dziennik `DREAMS.md` i awans tylko
-  pewnych faktów.
+  jeden z 4 slotów DeepSeek-V4-Flash na heartbeat i cron, żeby tło nie blokowało rozmowy; pamięć konsoliduj w nocy
+  (`DREAMS.md`), gdy wszystkie sloty są wolne.
 - **Czego nie kopiować:** otwartego rynku umiejętności bez weryfikacji, piaskownicy „opcjonalnej" i sekretów bez
   szyfrowania. OpenClaw w kancelarii — tylko w opakowaniu typu NemoClaw (piaskownica, lista dozwolonych adresów,
   zatwierdzenia operatora).
@@ -129,14 +124,11 @@ cache ([pułapka H4](../harnessy-agentowe/01-PROFILE.md#siedem-pułapek-wspólny
   testowych, *dane fundacji*). Mimo to The Register (31.08.2026) o wersji 2.0: sekrety bez szyfrowania, piaskownica
   domyślnie wyłączona. Fundacja sama przyznaje, że domyślna postawa działów IT to zakaz takich agentów.
 - **Autonomia bez nadzoru kompromituje:** MoltMatch (II 2026) — agent sam założył właścicielowi profil randkowy;
-  inny „zhakował" listę oczekujących na siłowni i wypchnął cudze rezerwacje. Moltbook, sieć społecznościowa tylko dla
-  agentów (28.01.2026): Wiz znalazł 1,5 mln odsłoniętych tokenów API i 35 tys. e-maili, a 1,5 mln agentów należało
-  do 17 tys. ludzi; Meta kupiła Moltbook 10.03.2026.
+  inny „zhakował" listę oczekujących na siłowni. W Moltbooku, sieci tylko dla agentów, Wiz znalazł 1,5 mln
+  odsłoniętych tokenów API; Meta i tak kupiła serwis (10.03.2026).
 - **Od „wirusa" do produktu:** Nadella w II 2026 porównał OpenClaw do wirusa, we wrześniu Microsoft wypuścił na nim
   Autopilota i wysyła poprawki upstream (zgodność z polityką firmy, Windows/WinUI, Teams, ukrywanie sekretów w monitach
-  o zatwierdzenie). Chiny w III 2026 ograniczyły OpenClaw w bankach, urzędach i spółkach państwowych, a Shenzhen
-  w tym samym czasie go dotował. Wydania 2026.4.24–4.29 psuły bramki i kanały; Steinberger przeprosił i przyznał, że
-  projekt był „too founder-driven" (5.05.2026).
+  o zatwierdzenie). Chiny w III 2026 ograniczyły OpenClaw w bankach i urzędach, a Shenzhen w tym samym czasie go dotował.
 - **Ten sam projekt, inna ocena:** w [przeglądzie harnessów](../harnessy-agentowe/01-PROFILE.md#pozostali-kandydaci-miejsca-2164)
   OpenClaw jest na 47. miejscu (64 pkt), bo tam liczyły się praca z lokalnym modelem, hybryda i bezpieczeństwo.
   Tu oceniam asystenta jako produkt i lekcję rynkową — i tu wygrywa trakcją oraz ideą. Oba wnioski są zgodne:
@@ -163,9 +155,8 @@ Self-hostingu modelu nie ma; najbliżej suwerenności jest Bedrock, Vertex albo 
 
 **Cel.**
 - **Czat** (Pro, Max, Team, Enterprise) — codzienny asystent z pamięcią, konektorami i umiejętnościami.
-- **Cowork** — agent dla nietechnicznych pracowników wiedzy: dokumenty, arkusze, prezentacje w folderach, które
-  wskaże użytkownik.
-- **Claude in Chrome i computer use** — wykonawca w przeglądarce i na pulpicie; w API dla twórców RPA i QA.
+- **Cowork** — agent dla nietechnicznych pracowników wiedzy (dokumenty, arkusze, prezentacje we wskazanych folderach);
+  **Claude in Chrome i computer use** — wykonawca w przeglądarce i na pulpicie, w API także dla twórców RPA i QA.
 - **Claude Code** — programiści w terminalu, IDE, aplikacji desktop i webie; w II 2026 ponad połowa przychodu Claude
   Code pochodziła z firm *(dane firmy)*.
 - **Wersje branżowe** — „Claude for Legal" z wtyczkami dla specjalizacji i konektorami MCP do Westlaw, Box i Docusign
@@ -175,16 +166,15 @@ Self-hostingu modelu nie ma; najbliżej suwerenności jest Bedrock, Vertex albo 
 - **Pamięć** (25.08.2026): jedna dla czatu i Cowork, zapisana jako czytelne pliki tematyczne do edycji i usunięcia;
   tematy wrażliwe (zdrowie, przekonania itd.) **domyślnie nie są zapisywane**.
 - **„Jeden Claude"** (16.09.2026): Cowork scalony z czatem; zadania pracują dalej „even after you've closed your
-  laptop" i dają się planować („Schedule it for every Monday"); domyślnie Claude pyta przed działaniem.
-- **Dispatch** (23.03.2026, razem z computer use jako research preview w Pro i Max): zadanie wysłane z telefonu,
-  Claude obsługuje programy na komputerze.
+  laptop" i dają się planować („Schedule it for every Monday"); domyślnie Claude pyta przed działaniem. Wcześniej
+  **Dispatch** (23.03.2026, z computer use, research preview w Pro i Max): zadanie z telefonu wykonywane na komputerze.
 - **Claude in Chrome**: panel boczny, który nawiguje, wypełnia formularze, pracuje w kilku kartach we własnej grupie,
   uruchamia zadania w tle i według harmonogramu; GA na wszystkich płatnych planach.
 - **Computer use i browser use w API** (GA, toolsety `*_20260801`): 17 narzędzi pulpitu z akcjami wsadowymi (stop na
   pierwszym błędzie) i 31 narzędzi przeglądarki opartych na drzewie dostępności; wykonuje je **Twoje** środowisko.
 - **Claude Code**: pętla w terminalu (pliki, powłoka), MCP, subagenci, hooki, umiejętności, wtyczki, plik
   `CLAUDE.md`; sesje w chmurze (VM Anthropic albo środowisko klienta), Remote Control, Routines (14.04.2026).
-- **Konektory, umiejętności i wtyczki** wspólne dla czatu, Cowork, Chrome i Claude Code.
+  Konektory, umiejętności i wtyczki działają też w czacie, Cowork i Chrome.
 
 **Przewaga.**
 - **Model i agent z jednego laboratorium.** OSWorld: 14,9% (22.10.2024) → 61,4% (29.09.2025) → 72,5% (II 2026, przy
@@ -197,8 +187,7 @@ Self-hostingu modelu nie ma; najbliżej suwerenności jest Bedrock, Vertex albo 
   umiejętności, hooki) przechodzą do biura.
 - **Opublikowane liczby obrony przed prompt injection:** skuteczność ataku w Chrome 23,6% → 11,2% po zabezpieczeniach
   (25.08.2025); ok. 1% dla Opus 4.5 przy adaptacyjnym atakującym (24.11.2025) — Anthropic dodaje, że to „still
-  represents meaningful risk".
-- **Dystrybucja przez abonament:** Cowork, Chrome i Claude Code są w cenie planów Pro, Max i Team.
+  represents meaningful risk". Do tego dystrybucja: Cowork, Chrome i Claude Code są w cenie planów Pro, Max i Team.
 
 **Architektura.**
 ```
@@ -210,9 +199,8 @@ model w chmurze (Anthropic API / Bedrock / Vertex / Foundry)
    ├─ API computer/browser use ─ akcje wykonuje piaskownica dewelopera („nothing executes on Anthropic's servers")
    └─ Claude Code ────── lokalny CLI: pliki, powłoka, hooki, MCP, subagenci; transkrypcje na dysku
 ```
-- **Pętla computer use:** model dostaje toolset → emituje `tool_use` → aplikacja wykonuje akcję → odsyła zrzut albo
-  wynik → powtórka. Zrzut kosztuje ok. 1000–1800 tokenów; zalecenia: 1024×768–1280×800, ≤20 obrazów na żądanie,
-  prompt caching, przycinanie starych zrzutów partiami (np. co 25 tur), dane logowania w `<robot_credentials>`.
+- **Pętla computer use:** toolset → `tool_use` → aplikacja wykonuje akcję → odsyła zrzut (ok. 1000–1800 tokenów) →
+  powtórka; zalecenia: 1024×768–1280×800, ≤20 obrazów, prompt caching, przycinanie starych zrzutów partiami.
 - **Browser use** czyta drzewo dostępności (mniej tokenów niż zrzuty), a odwołania do elementów przetrwają przesunięcia
   układu. Walidacja URL (odrzucanie `javascript:`, `file:`, `data:`) należy do dewelopera; upload i JS domyślnie wyłączone.
 - **Gdzie pracuje Cowork:** w styczniu 2026 (research preview) w **lokalnej VM Linux** na frameworku Apple
@@ -220,17 +208,15 @@ model w chmurze (Anthropic API / Bedrock / Vertex / Foundry)
   artykuł pomocy mówi: „Cowork runs your tasks in the cloud" — w izolowanym środowisku na serwerach Anthropic;
   uprawnienia ruchu wychodzącego **nie obejmują** web fetch, web search ani MCP. Model zawsze działał w chmurze.
 - **Chrome:** uprawnienia per witryna, potwierdzenia przed publikacją, zakupem i udostępnieniem danych osobowych,
-  zablokowane kategorie (usługi finansowe, treści dla dorosłych, piractwo), klasyfikatory wstrzyknięć, trening RL na
-  wrogich treściach; w Team i Enterprise listy dozwolonych i zablokowanych witryn ustawia administrator.
-- **Claude Code — dane:** transkrypcje lokalnie w `~/.claude/projects/` przez 30 dni; konta firmowe — retencja 30 dni,
-  Enterprise — zero data retention po uzgodnieniu; konsumenckie — 30 dni albo 5 lat przy zgodzie na trening;
-  `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` wyłącza zbędny ruch; w chmurowych VM dane logowania GitHuba nie
-  wchodzą do maszyny, a ruch wychodzi przez proxy bezpieczeństwa.
+  zablokowane kategorie (m.in. usługi finansowe), klasyfikatory wstrzyknięć, trening RL na wrogich treściach.
+- **Claude Code — dane:** transkrypcje lokalnie przez 30 dni; retencja: firmy 30 dni, Enterprise — zero data retention
+  po uzgodnieniu, konsumenci 30 dni albo 5 lat przy zgodzie na trening; `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`
+  wyłącza zbędny ruch; w chmurowych VM dane logowania GitHuba nie wchodzą do maszyny.
 
 **Na czym zarabia.**
 - **Abonamenty** (wg stanu na 10.2026): Pro 20 USD/mies. (17 USD przy płatności rocznej), Max 100 i 200 USD,
-  Team 20 USD za stanowisko (2–150 osób), Enterprise — indywidualnie. Chrome najpierw tylko w Max (pilot 1000 osób
-  od 25.08.2025), od 18.12.2025 także w Pro, Team i Enterprise.
+  Team 20 USD za stanowisko (2–150 osób), Enterprise — indywidualnie. Chrome najpierw tylko w Max (pilot od
+  25.08.2025), od 18.12.2025 także w Pro, Team i Enterprise.
 - **API za tokeny:** Opus 5.5 — 4 / 20 USD za 1 mln tokenów wejścia/wyjścia (22.09.2026); Sonnet 4.6 — 3 / 15 USD;
   także przez AWS, Google Cloud i Azure.
 - **Limity tygodniowe** w Claude Code (ogłoszone 28.07.2025, od 28.08.2025) jako odpowiedź na pracę 24/7 w tle
@@ -263,8 +249,6 @@ firm: w Microsoft 365 Copilot modele Anthropic są **wyłączone z EU Data Bound
   klucze API.
 
 **Warto wiedzieć.**
-- **Skromny start:** computer use wszedł do API 22.10.2024 jako „experimental — at times cumbersome and error-prone";
-  14,9% na OSWorld i tak dawało prawie dwa razy więcej niż następny wynik (7,8%).
 - **PromptArmor (I 2026):** biały tekst na białym tle w dokumencie kazał Cowork wysłać pliki ofiary na konto
   atakującego przez **dozwolone API Anthropic** z kluczem atakującego (zadziałało na Haiku i Opus 4.5). Anthropic
   zalecił nie udostępniać wrażliwych plików lokalnych.
@@ -276,10 +260,10 @@ firm: w Microsoft 365 Copilot modele Anthropic są **wyłączone z EU Data Bound
   around the work", a nie autonomiczne zarządzanie życiem.
 - **Nadużycia:** Claude Code użyto w kampanii wymuszeń danych (VIII 2025) i w chińskiej kampanii szpiegowskiej
   (IX 2025), która zautomatyzowała 80–90% pracy (Wired i BBC wg Wikipedii).
-- **Lekcja biznesowa:** abonament ryczałtowy plus agenci pracujący 24/7 kończą się limitami — policz to, zanim
-  sprzedasz kancelarii „nielimitowanego asystenta".
+- **Lekcja biznesowa:** computer use startował 22.10.2024 jako „experimental — at times cumbersome and error-prone",
+  a abonament ryczałtowy plus agenci 24/7 skończył się limitami — policz to, zanim sprzedasz „nielimitowanego asystenta".
 
-**Źródła:** [seria G](https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation) · [pamięć](https://claude.com/resources/articles/claudes-memory-works-everywhere-and-you-decide-whats-in-it) · [Cowork to Claude](https://claude.com/resources/articles/cowork-is-now-claude) · [jak ludzie używają Cowork](https://claude.com/resources/articles/how-people-are-using-claude-cowork) · [Dispatch i computer use](https://claude.com/resources/articles/dispatch-and-computer-use) · [Routines](https://claude.com/resources/articles/introducing-routines-in-claude-code) · [Cowork research preview](https://claude.com/blog/cowork-research-preview) · [Cowork — pomoc](https://support.claude.com/en/articles/13345190-getting-started-with-cowork) · [Simon Willison o Cowork](https://simonwillison.net/2026/Jan/12/claude-cowork/) · [computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) · [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) · [demo computer use](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) · [Claude for Chrome](https://claude.com/blog/claude-for-chrome) · [Claude in Chrome](https://claude.com/chrome) · [obrona przed prompt injection](https://www.anthropic.com/research/prompt-injection-defenses) · [computer use 2024](https://www.anthropic.com/news/3-5-models-and-computer-use) · [Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5) · [Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) · [Opus 5.5](https://www.anthropic.com/news/claude-opus-5-5) · [Vercept](https://www.anthropic.com/news/acquires-vercept) · [Claude Code — dane](https://code.claude.com/docs/en/data-usage) · [limity tygodniowe](https://techcrunch.com/2025/07/28/anthropic-unveils-new-rate-limits-to-curb-claude-code-power-users/) · [Stack Overflow 2026](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) · [SemiAnalysis za prasą](https://www.itiger.com/hans/news/1183910360) · [Claude for Legal](https://techcrunch.com/2026/05/12/the-ai-legal-services-industry-is-heating-up-anthropic-is-getting-in-on-the-action/) · [CoCounsel na Agent SDK](https://www.lawnext.com/2026/06/thomson-reuters-opens-early-access-to-the-next-generation-of-cocounsel-legal-saying-beta-users-fing-loved-the-product.html) · [EU Data Boundary](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy) · [PromptArmor](https://www.promptarmor.com/resources/claude-cowork-exfiltrates-files) · [BragJack](https://www.bleepingcomputer.com/news/security/bragjack-attacks-hijack-ai-browser-agents-through-malicious-extensions/) · [Wikipedia: Claude](https://en.wikipedia.org/wiki/Claude_(language_model))
+**Źródła:** [seria G](https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation) · [pamięć](https://claude.com/resources/articles/claudes-memory-works-everywhere-and-you-decide-whats-in-it) · [Cowork to Claude](https://claude.com/resources/articles/cowork-is-now-claude) · [jak ludzie używają Cowork](https://claude.com/resources/articles/how-people-are-using-claude-cowork) · [Dispatch i computer use](https://claude.com/resources/articles/dispatch-and-computer-use) · [Routines](https://claude.com/resources/articles/introducing-routines-in-claude-code) · [Cowork research preview](https://claude.com/blog/cowork-research-preview) · [Cowork — pomoc](https://support.claude.com/en/articles/13345190-getting-started-with-cowork) · [Simon Willison o Cowork](https://simonwillison.net/2026/Jan/12/claude-cowork/) · [computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) · [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) · [demo computer use](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) · [Claude for Chrome](https://claude.com/blog/claude-for-chrome) · [Claude in Chrome](https://claude.com/chrome) · [obrona przed prompt injection](https://www.anthropic.com/research/prompt-injection-defenses) · [computer use 2024](https://www.anthropic.com/news/3-5-models-and-computer-use) · [Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5) · [Sonnet 4.6](https://www.anthropic.com/news/claude-sonnet-4-6) · [Opus 5.5](https://www.anthropic.com/news/claude-opus-5-5) · [Vercept](https://www.anthropic.com/news/acquires-vercept) · [Claude Code — dane](https://code.claude.com/docs/en/data-usage) · [limity tygodniowe](https://techcrunch.com/2025/07/28/anthropic-unveils-new-rate-limits-to-curb-claude-code-power-users/) · [Stack Overflow 2026](https://stackoverflow.blog/2026/10/06/the-results-of-the-2026-developer-survey-are-here/) · [SemiAnalysis za prasą](https://www.itiger.com/hans/news/1183910360) · [Claude for Legal](https://techcrunch.com/2026/05/12/the-ai-legal-services-industry-is-heating-up-anthropic-is-getting-in-on-the-action/) · [CoCounsel na Agent SDK](https://www.lawnext.com/2026/06/thomson-reuters-opens-early-access-to-the-next-generation-of-cocounsel-legal-saying-beta-users-fing-loved-the-product.html) · [EU Data Boundary](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy) · [PromptArmor](https://www.promptarmor.com/resources/claude-cowork-exfiltrates-files) · [BragJack](https://www.bleepingcomputer.com/news/security/bragjack-attacks-hijack-ai-browser-agents-through-malicious-extensions/) · [Wikipedia: Claude](https://en.wikipedia.org/wiki/Claude_(language_model)) · [Wikipedia: Claude (AI)](https://en.wikipedia.org/wiki/Claude_(AI))
 
 
 ---
@@ -359,7 +343,7 @@ nie słyszy — mowa musi przejść przez osobny model STT (patrz [Głos](../har
 - **Własny test ASR na polskich nazwach leków** (lista z ChPL) — to tam leży największe ryzyko i najlepszy argument
   sprzedażowy.
 - **Zakres: tylko dokumentacja.** Kodeks Etyki Lekarskiej art. 12 wymaga zgody pacjenta i certyfikowanego algorytmu
-  przy AI w postępowaniu diagnostycznym lub leczniczym; notatka i pisma bez sugestii diagnozy są poza tym zakresem
+  przy AI w postępowaniu diagnostycznym lub leczniczym; notatka i pisma bez sugestii diagnozy są — wg mojej wykładni — poza zakresem art. 12 KEL (NIL nie zajął stanowiska w sprawie skrybów)
   (szczegóły w [04-POLSKA-I-SUWERENNOSC.md](04-POLSKA-I-SUWERENNOSC.md); to nie jest porada prawna).
 - **Usuwanie nagrania po podpisaniu notatki** i wsparcie techniczne bez dostępu do danych: dostawca z dostępem
   zdalnym do komputera przychodni staje się podmiotem przetwarzającym (art. 28 RODO) związanym tajemnicą
@@ -828,7 +812,7 @@ DOM i drzewie dostępności (zob. [browser-use](#13-browser-use)).
 
 **Warto wiedzieć.**
 - **Cmentarz produktów:** Operator (I–VIII 2025), Pulse (ok. 9 miesięcy), Atlas (21.10.2025 – 9.08.2026; tylko macOS,
-  ok. 10 mln MAU wg szacunku 36Kr), Custom GPTs (XII 2026). Wg Wikipedii sam „ChatGPT agent" zniknął na początku VIII 2026
+  ok. 10 mln MAU wg szacunku 36Kr), Custom GPTs (wygaszanie zapowiedziane na XII 2026). Wg Wikipedii sam „ChatGPT agent" zniknął na początku VIII 2026
   na rzecz Work (niezweryfikowane gdzie indziej). Hasło OpenAI: „AI browsers should be a feature, not a destination";
   wszystkie AI-przeglądarki razem miały poniżej 1% rynku.
 - **Atlas i bezpieczeństwo:** „Tainted Memories" (LayerX, X 2025; OpenAI kwestionuje), wstrzyknięcia i wycieki przez URL.
@@ -859,7 +843,7 @@ DOM i drzewie dostępności (zob. [browser-use](#13-browser-use)).
 **Kategoria:** codzienny + wykonawca · **Kod:** zamknięty (otwarta rodzina Gemma obok) · **Firma:** Google / Alphabet (USA) ·
 **Wynik: 87** (T5 I4 L4 A4)
 
-> Asystent wbudowany w Androida, Chrome i Workspace (950 mln MAU w II kw. 2026), z agentem, który pracuje w chmurze albo
+> Asystent wbudowany w Androida, Chrome i Workspace (ponad 1 mld MAU, 11.08.2026, *dane firmy*), z agentem, który pracuje w chmurze albo
 > w Twoim zalogowanym Chrome. W czołówce za dystrybucję i za najlepiej opisaną publicznie architekturę bezpieczeństwa
 > agenta przeglądarkowego: planista + krytyk + zbiory originów.
 
@@ -888,7 +872,7 @@ Deweloperom Google sprzedaje model computer use do automatyzacji interfejsów.
   Commerce Protocol, pyta przed zakupem i publikacją. Tylko USA.
 - **Gemini Computer Use w API:** od 7.10.2025 (2.5, przeglądarka); w 2026 Gemini 3.8 Flash (zalecany), 3.5 Flash-Lite
   i 3 Flash Preview, w przeglądarce, na Androidzie i na desktopie.
-- **Gems → Skills** wywoływane „/" w polu zapytania (migracja 17.11.2026).
+- **Gems → Skills** wywoływane „/" w polu zapytania (migracja zapowiedziana na 17.11.2026).
 - **Na urządzeniu:** Gemini Nano przez AICore — streszczanie, korekta, przepisywanie, opis obrazu, transkrypcja offline.
 
 **Przewaga.**
@@ -939,9 +923,7 @@ Deweloperom Google sprzedaje model computer use do automatyzacji interfejsów.
 - Alphabet nie wydziela subskrypcji AI: segment „subscriptions, platforms and devices" dał 12,9 mld USD w II kw. 2026
   (+15% r/r).
 
-**Offline.** **Częściowo.** Gemini Nano na wspieranych telefonach robi offline proste rzeczy (streszczenie, korekta,
-transkrypcja), ale to nie jest asystent. Aplikacja, Live, Spark, Agent i auto browse działają tylko w chmurze. Gemmę 4
-można postawić u siebie obok DeepSeeka (licencję trzeba sprawdzić). Lokalny odpowiednik Sparka to harmonogram + kolejka
+**Offline.** **Nie.** Gemini Nano na wspieranych telefonach robi offline tylko proste rzeczy (streszczenie, korekta, transkrypcja) i nie jest asystentem. Aplikacja, Live, Spark, Agent i auto browse działają tylko w chmurze. Gemmę 4 można postawić u siebie, ale na rigu dopiero po zwolnieniu karty z DeepSeeka (licencję trzeba sprawdzić). Lokalny odpowiednik Sparka to harmonogram + kolejka
 zadań z limitem równoległości (u mnie 4 sloty) + przeglądarka w kontenerze + planista i krytyk.
 
 **Co przenieść do siebie.**
@@ -1243,15 +1225,14 @@ recepcja kancelarii) potrzebowałby: lokalnego modelu z zasadami w prostym języ
   rozliczony pakiet faktur KSeF — zamiast za tokeny, których lokalnie i tak prawie nie liczysz.
 - **Wąskie zadanie ze zdefiniowaną miarą sukcesu** na start (np. „projekt odpowiedzi na wezwanie do zapłaty
   zatwierdzony bez poprawek”), a nie „asystent do wszystkiego”.
-- **Protokół zamiast scrapingu:** gdy banki i urzędy zaczną wystawiać interfejsy dla osobistych agentów (PAP),
+- **Protokół zamiast scrapingu:** gdy banki i urzędy zaczną wystawiać interfejsy dla osobistych agentów (Personal Agent Protocol),
   agent biura będzie działał przez API z jawnie nadanym dostępem — warto już teraz oddzielać warstwę narzędzi od
   logiki agenta ([09-PROTOKOLY-MCP-CLI-A2A.md](../kurs_aplikacje_agentowe/09-PROTOKOLY-MCP-CLI-A2A.md)).
 
 **Warto wiedzieć.**
 - Założona przez Breta Taylora i Claya Bavora; start produktu w II 2024.
 - Ekspansja do Francji i biuro w Tokio (XII 2025); przejęcie startupu Fragment z YC (23.04.2026).
-- Bezpośredni konkurent Decagon (seria D 250 mln USD przy 4,5 mld, 27.01.2026) tego samego dnia co PAP ogłosił
-  własny protokół zgody i zaufania dla osobistych agentów, PACT (6.10.2026) — standard nie jest jeszcze przesądzony.
+- Bezpośredni konkurent Decagon (seria D: 250 mln USD przy 4,5 mld USD, 27.01.2026) ogłosił własny protokół zgody i zaufania PACT 6.10.2026 — tego samego dnia, w którym Sierra z Metą ogłosiła Personal Agent Protocol; standard nie jest jeszcze przesądzony.
 - Rynek idzie w stronę ceny za wynik: Intercom Fin bierze 0,99 USD za rozwiązaną sprawę, Parloa — za minutę lub
   interakcję *(cenniki firm)*.
 
@@ -1580,7 +1561,7 @@ Komentarzy Legalis/LEX lokalnie nie odtworzysz — i nie trzeba (patrz niżej).
 **Otwarty czy zamknięty.** Aplikacje, Comet i harness są zamknięte. Lokalny Portable Computer uruchamia **otwarte
 modele**: Qwen 3.8 27B i dotrenowany przez Perplexity „PPLX 27B" (Nvidia Nemotron 3.5 Lightning zapowiedziany). Otwarty jest
 też **BrowseSafe** — klasyfikator prompt injection na bazie Qwen3-30B-A3B wraz z benchmarkiem BrowseSafe-Bench (Hugging
-Face, ok. 7.12.2025; licencji prasa nie podaje). Self-hosting: tak dla Portable Computer (na własnym GPU), nie dla reszty.
+Face, ok. 7.12.2025; licencji prasa nie podaje). Lokalne uruchomienie licencjonowanego produktu: tylko Portable Computer (na własnym GPU Nvidia), nie reszta.
 
 **Cel.** Dla ludzi, którzy dużo szukają i czytają: odpowiedź z cytatami zamiast listy linków. Na tym Perplexity zbudowała
 agenta w przeglądarce (Comet), chmurowego orkiestratora wielu modeli (Computer, plan Max) i — dla tych, którzy nie chcą
@@ -1651,15 +1632,12 @@ wysyłać danych — agenta w pełni lokalnego.
   przychód z aplikacji w Indiach ok. 156 tys. USD/mies. *(Appfigures przez TechCrunch)*.
 - Umowa chmurowa z Azure: 750 mln USD na 3 lata (I 2026). Udział w rynku aplikacji asystentów: poniżej 5% (V 2026).
 
-**Offline.** **Częściowo — w pełni dla Portable Computer.** Wyszukiwarka, Comet (rozumowanie na serwerach) i Computer to
-chmura. Portable Computer działa bez internetu: model 27B, narzędzia i piaskownica lokalnie, eskalacja do chmury jest
-opcjonalna (konektory typu Gmail czy Drive oczywiście potrzebują sieci). Haczyk dla mnie: wymaga Nvidii, więc na 4× AMD
-Radeon AI PRO R9700 gotowy produkt nie ruszy. Wzorzec za to przenosi się w całości — skoro Perplexity uruchamia model 27B
-na 24 GB, karta R9700 z 32 GB pomieści go na jednym slocie.
+**Offline.** **Częściowo.** Wyszukiwarka, Comet (rozumowanie na serwerach) i Computer to
+chmura. Portable Computer wykonuje inferencję i narzędzia lokalnie (model 27B, piaskownica), ale produkt jest zamknięty i w cenie Pro/Max; pracy bez sieci (aktywacja subskrypcji, pobranie modeli, aktualizacje) nie zweryfikowałem — źródłem jest tylko prasa. Konektory (Gmail, Drive) i opcjonalna eskalacja do chmury wymagają sieci. Haczyk dla mnie: wymaga Nvidii, więc na 4× AMD
+Radeon AI PRO R9700 gotowy produkt nie ruszy. Wzorzec za to przenosi się w całości — skoro Perplexity uruchamia model 27B na 24 GB, ten rozmiar zmieści się na jednej karcie 32 GB, ale dopiero po jej zwolnieniu: przy DeepSeek-V4-Flash na 4 kartach zostaje ok. 1,4 GB wolnego VRAM na kartę (zob. [architektura harnessów](../harnessy-agentowe/03-ARCHITEKTURA.md)); do testów — wymiana modelu w llama-swap albo osobna maszyna.
 
 **Co przenieść do siebie.**
-- **Specyfikacja pudełka na biurku potwierdzona przez rynek:** model ~27B + vLLM + 24–32 GB VRAM. Na rigu jedna karta może
-  trzymać agenta 27B obok DeepSeek-V4-Flash; Qwen3.8-27B deklaruje przy tym 84,3% na OSWorld-Verified (karta modelu, VIII
+- **Specyfikacja pudełka na biurku potwierdzona przez rynek:** model ~27B + vLLM + 24–32 GB VRAM. Na rigu agent 27B (Q4 ok. 18,5 GB) zmieści się na jednej karcie dopiero po jej zwolnieniu z DeepSeeka; Qwen3.8-27B deklaruje przy tym 84,3% na OSWorld-Verified (karta modelu, VIII
   2026, niezweryfikowane niezależnie) — uzupełnienie tekstowego DeepSeeka w zadaniach na ekranie.
 - **Fail closed:** nie ma piaskownicy — agent nie startuje
   ([piaskownica](../kurs_lokalne_modele/07-SANDBOX-BEZPIECZENSTWO-MONITORING.md)).
@@ -1742,7 +1720,7 @@ wiersz z jedną liczbą i datą, jeśli research ją potwierdził. Gwiazdki z AP
 | Doubao (ByteDance) | codzienny, Chiny | zamknięty | Ponad 200 mln DAU (IX 2026, LatePost przez TechNode); umiejętności uczone z nagrania ekranu i przekazanie zadania z telefonu na PC. Od 15.07.2026 chińskie przepisy zamknęły agentów tworzonych przez użytkowników. | [TechNode](https://technode.com/2026/09/23/bytedance-doubao-general-session-team-cuts/) |
 | Qwen app (Alibaba) | codzienny, Chiny | aplikacja zamknięta, modele otwarte | Kampania za ok. 6 mld RMB dała skok DAU, ale sesja trwa ok. 1,3 min — kupieni użytkownicy nie zostają. 167 mln MAU (V–VI 2026). Ważniejszy jest model: Qwen 3.8 27B napędza lokalny Portable Computer [Perplexity](01-PROFILE.md#15-perplexity). | [TechTimes](https://www.techtimes.com/articles/323907/20260811/qwen-sells-paid-office-subscriptions-users-it-bought-with-free-bubble-tea.htm) |
 | DeepSeek app | codzienny | aplikacja zamknięta, wagi MIT | 130 mln MAU (V 2026). Aplikacja jest słaba agentowo, ale wagi V4-Flash na MIT to silnik mojego rigu. Berliński urząd ochrony danych zażądał usunięcia aplikacji ze sklepów w Niemczech (27.06.2025) — liczy się, gdzie przetwarzane są dane. | [Hugging Face](https://huggingface.co/api/models?author=deepseek-ai&sort=lastModified) · [netzpolitik](https://netzpolitik.org/2025/datenschutzbehoerde-greift-ein-deepseek-fliegt-aus-den-app-stores/) |
-| Mistral Vibe (dawniej Le Chat) | codzienny + firmowy (UE) | aplikacja zamknięta, wiele modeli otwartych | Dowód, że „suwerenne AI" to płacący rynek: 3 mld EUR przy wycenie ponad 21 mld EUR (8.09.2026), Pro za 14,99 USD, on-premise dla firm, 100+ konektorów z pełnym MCP. | [TechCrunch](https://techcrunch.com/2026/09/08/mistral-raises-e3b-as-sovereign-ai-becomes-big-business/) · [cennik](https://mistral.ai/pricing) |
+| Mistral Vibe (dawniej Le Chat) | codzienny + firmowy (UE) | aplikacja zamknięta, wiele modeli otwartych | Dowód, że „suwerenne AI" to płacący rynek: 3 mld EUR przy wycenie ponad 21 mld EUR (8.09.2026), Pro 14,99 EUR bez VAT (wersja USD strony podaje 14,99 USD), on-premise dla firm, 100+ konektorów z pełnym MCP. | [TechCrunch](https://techcrunch.com/2026/09/08/mistral-raises-e3b-as-sovereign-ai-becomes-big-business/) · [cennik](https://mistral.ai/pricing) |
 | Instinct | codzienny, przez iMessage | zamknięty | Konsjerż w iMessage: dzwoni do firm, ma własne adresy e-mail, używa tymczasowych poświadczeń i izolowanych piaskownic. Seria C 1 mld USD przy wycenie 10 mld USD (28.09.2026). | [Pulse 2.0](https://pulse2.com/instinct-raises-1-billion-series-c-at-10-billion-valuation/) |
 
 ### Wykonawcy, przeglądarki i otwarte szkielety
@@ -1756,7 +1734,7 @@ wiersz z jedną liczbą i datą, jeśli research ją potwierdził. Gwiazdki z AP
 | Microsoft Fara-7B + MagenticLite | wykonawca na urządzeniu | otwarty, MIT | Model computer use 7B (z Qwen2.5-VL) trenowany na 145 tys. syntetycznych trajektorii: WebVoyager 73,5%, ok. 16 kroków na zadanie wobec ok. 41 (XI 2025, *dane firmy*). Destylacja dużego agenta do małego modelu. | [MSR](https://www.microsoft.com/en-us/research/blog/fara-7b-an-efficient-agentic-model-for-computer-use/) |
 | Open-AutoGLM (Z.ai) | wykonawca na telefonie | otwarty, Apache-2.0; model MIT | AutoGLM-Phone-9B steruje Androidem przez ADB i wymaga GPU 24 GB+; wersja chmurowa kosztowała ok. 0,2 USD za zadanie (VIII 2025). Telefon lub VM jako piaskownica zamiast prawdziwego pulpitu. | [repo](https://github.com/zai-org/Open-AutoGLM) |
 | Skywork Desktop | wykonawca biurowy | zamknięty (części otwarte) | Pracuje na wskazanych folderach w lokalnej izolowanej VM, oddaje gotowe dokumenty, slajdy i arkusze; „AI tool business" Kunlun ma ponad 100 mln USD ARR (II kw. 2026). Modele w chmurze. | [Skywork](https://skywork.ai/desktop/en/index.html) · [36Kr](https://eu.36kr.com/en/p/3878113666724100) |
-| Opera Neon | przeglądarka agentowa | zamknięty | Firma z Norwegii (EOG). Agent czyta DOM zamiast zrzutów ekranu; od 14.08.2026 darmowy plan dla zewnętrznych agentów przez MCP i Opera Browser CLI — lokalny agent może sterować prawdziwą przeglądarką. Neon za 19,90 USD/mies. Notatka w researchu wskazuje rozwój przeglądarki desktopowej w Polsce — bez źródła, niezweryfikowane. | [Opera](https://blogs.opera.com/news/2026/08/your-ai-agents-can-use-opera-neon-free-of-charge/) · [MCP](https://press.opera.com/2026/03/31/opera-neon-adds-mcp-connector/) |
+| Opera Neon | przeglądarka agentowa | zamknięty | Firma z Norwegii (EOG). Agent czyta DOM zamiast zrzutów ekranu; od 14.08.2026 darmowy plan dla zewnętrznych agentów przez MCP i Opera Browser CLI — lokalny agent może sterować prawdziwą przeglądarką. Neon za 19,90 USD/mies.  | [Opera](https://blogs.opera.com/news/2026/08/your-ai-agents-can-use-opera-neon-free-of-charge/) · [MCP](https://press.opera.com/2026/03/31/opera-neon-adds-mcp-connector/) |
 | Fellou + Eko | przeglądarka agentowa | przeglądarka zamknięta, Eko MIT (ok. 4,96k gwiazdek) | Plan widoczny i edytowalny przed wykonaniem, koszt w kredytach pokazany przed startem (ok. 250 kredytów, czyli 2–2,4 USD na złożone zadanie, X 2026). Brave wykazało, że treść strony trafiała do modelu automatycznie. Brak nowości w 2026. | [cennik](https://fellou.ai/pricing) · [Eko](https://github.com/FellouAI/eko) |
 | Amazon Nova Act | wykonawca firmowy | zamknięty | Rozliczenie 4,75 USD za godzinę pracy agenta, a czas czekania na człowieka jest darmowy; workflow łączy deterministyczny kod Pythona z krokami `act()` w języku naturalnym. | [cennik](https://aws.amazon.com/nova/pricing/) · [AWS](https://aws.amazon.com/blogs/aws/build-reliable-ai-agents-for-ui-workflow-automation-with-amazon-nova-act-now-generally-available/) |
 
