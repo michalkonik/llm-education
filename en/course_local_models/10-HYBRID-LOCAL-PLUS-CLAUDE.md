@@ -504,7 +504,7 @@ agent running offline on your hardware.
    Everything else without it is guessing.
 2. **Run the agent on a real accounting task** and write down where it fails.
 3. **Fix the harness, not the prompt** — that is the lesson of part 6.
-4. **Add cards 3 and 4** (`KARTY-3-I-4-PLAN-PODLACZENIA.md`) and run `gpt-oss-120b`.
+4. **If you add more GPUs**, remap them in `rig-env.sh` (see the course index) and run a larger model such as `gpt-oss-120b`.
 5. **Measure everything again.**
 
 ⭐ **The most important thing you take away from this course is not code.** It is the ability to

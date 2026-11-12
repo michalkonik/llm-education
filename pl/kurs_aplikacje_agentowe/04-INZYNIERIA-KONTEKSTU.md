@@ -401,7 +401,7 @@ leży **istotnie poniżej** deklarowanej długości kontekstu.
 
 ```bash
 mkdir -p $OSA/pomiary/kontekst && cd $OSA/pomiary/kontekst
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 ```
 

@@ -11,7 +11,7 @@
 > modeli, własna kwantyzacja, LoRA i plan na cztery karty.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 ```
 
@@ -555,9 +555,8 @@ rozmiarze.**
 ```bash
 mkdir -p $KURS/kalibracja
 
-# Zbierz swoj realny tekst domenowy
-cat ~/Desktop/local_agents_project/lokalne/TECHNIKA.md \
-    ~/Desktop/local_agents_project/lokalne/HANDOFF.md \
+# Zbierz swoj realny tekst domenowy (wlasne notatki i dokumenty z czesci 4)
+cat ~/sciezka/do/twoich/notatek/*.md \
     $KURS/dokumenty/*.md \
     2>/dev/null > $KURS/kalibracja/domena.txt
 
@@ -842,7 +841,7 @@ ląduje w pamięci hosta.
 
 ### 8.2 ⛔ P2P musi zostać wyłączone
 
-**Pułapka P4** z `TECHNIKA.md`: na konfiguracji 4 × R9700 transfery P2P **zawieszają cały
+**Pułapka P4** (pułapka sprzętowa maszyny referencyjnej): na konfiguracji 4 × R9700 transfery P2P **zawieszają cały
 host** (ROCm #11348), i pod llama.cpp, i pod vLLM.
 
 ```bash
@@ -851,11 +850,7 @@ export NCCL_P2P_DISABLE=1
 export NCCL_PROTO=Simple
 # GGML_CUDA_P2P: NIE USTAWIAJ
 
-cat >> $LLMEDU/rig-env.sh <<'EOF'
-# P4: P2P zawiesza host na 4x R9700
-export NCCL_P2P_DISABLE=1
-export NCCL_PROTO=Simple
-EOF
+grep NCCL $LLMEDU/rig-env.sh    # obie linie sa juz w rig-env.sh (tylko ROCm z wieloma kartami)
 ```
 
 ### 8.3 Dwie architektury do wyboru

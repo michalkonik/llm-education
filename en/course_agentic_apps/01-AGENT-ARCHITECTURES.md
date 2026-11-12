@@ -407,7 +407,7 @@ as an adapter bolted on from the side. For you it is **the core, not a plugin**.
 times** (because what interests you is repeatability, not a one-off success):
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # the repository directory (yours may differ)
+cd ~/llm-education   # the repository directory (yours may differ)
 source rig-env.sh
 mkdir -p $OSA/pomiary
 ```

@@ -15,7 +15,7 @@ none handle the third.
    → fact retrieval.                             easy
 
 2. "How much do I pay for electricity?"
-   → it was PLN 210, then PLN 280, from July PLN 245.
+   → it was PLN 190, then PLN 230, from July PLN 205.
      Which answer is correct?                    hard
 
 3. "How much did I pay for electricity in April?"
@@ -46,10 +46,10 @@ in architecture — and it follows almost entirely from the answer to question 3
 
 ```markdown
 # MEMORY.md
-- Michał, Kraków, timezone Europe/Warsaw
-- Works on the "sovereign agent" project — local agents for regulated professions
+- Anna, Poznań, timezone Europe/Warsaw
+- Works on the "garden planner" project — a small app for allotment gardeners
 - Cannot stand answers that begin with "Great question!"
-- Electricity bill: PLN 245 (from July 2026; previously PLN 280)
+- Electricity bill: PLN 205 (from July 2026; previously PLN 230)
 ```
 
 | Advantages | Disadvantages |
@@ -97,10 +97,10 @@ Here is that 22-point difference. **Every fact carries four timestamps, not one.
 ```
 
 ```
-Electricity bill = PLN 280   valid 2026-03-01 … 2026-06-30
+Electricity bill = PLN 230   valid 2026-03-01 … 2026-06-30
                              recorded 2026-03-05, invalidated 2026-07-02
 
-Electricity bill = PLN 245   valid 2026-07-01 … (still)
+Electricity bill = PLN 205   valid 2026-07-01 … (still)
                              recorded 2026-07-02
 ```
 
@@ -108,12 +108,12 @@ Now **all three questions from §0 have an unambiguous answer**:
 
 ```sql
 -- "What do I pay now?"            → ważny_od ≤ today < ważny_do
--- "What did I pay in April?"      → ważny_od ≤ 2026-04-15 < ważny_do   → PLN 280
+-- "What did I pay in April?"      → ważny_od ≤ 2026-04-15 < ważny_do   → PLN 230
 -- "What did the system know in May?" → zapisany ≤ 2026-05-01 < unieważniony
 ```
 
 **The third query is the one that saves you when debugging.** "Why did the agent
-say PLN 280 in May?" → because then it was its best knowledge. **That was not a
+say PLN 230 in May?" → because then it was its best knowledge. **That was not a
 mistake.** Without system time you cannot tell an agent's error from outdated data — and those are
 entirely different diagnoses.
 
@@ -263,13 +263,13 @@ The history is complete and **cannot be lost by accident**.
 
 ```python
 m = Magazyn("/tmp/test.db")
-m.zapisz("michal", "rachunek_prad", "kwota", "PLN 280", wazny_od="2026-03-01")
-m.zapisz("michal", "rachunek_prad", "kwota", "PLN 245", wazny_od="2026-07-01")
+m.zapisz("anna", "rachunek_prad", "kwota", "PLN 230", wazny_od="2026-03-01")
+m.zapisz("anna", "rachunek_prad", "kwota", "PLN 205", wazny_od="2026-07-01")
 
-print(m.czytaj("michal", "rachunek_prad")[0]["obiekt"])                    # PLN 245
-print(m.czytaj("michal", "rachunek_prad", na_moment="2026-04-15")[0]["obiekt"])  # PLN 280
-print(m.czytaj("michal", "rachunek_prad", wiedza_z="2026-05-01")[0]["obiekt"])   # PLN 280
-for h in m.historia("michal", "rachunek_prad", "kwota"): print(h)
+print(m.czytaj("anna", "rachunek_prad")[0]["obiekt"])                    # PLN 205
+print(m.czytaj("anna", "rachunek_prad", na_moment="2026-04-15")[0]["obiekt"])  # PLN 230
+print(m.czytaj("anna", "rachunek_prad", wiedza_z="2026-05-01")[0]["obiekt"])   # PLN 230
+for h in m.historia("anna", "rachunek_prad", "kwota"): print(h)
 ```
 
 ---
@@ -450,13 +450,13 @@ in practice.** A memory system that, for an unknown question, returns the neares
 ```python
 # historia.py — 8 months of life with 12 fact changes
 ZDARZENIA = [
-  ("2026-01-10", "rachunek_prad", "kwota", "PLN 210"),
-  ("2026-03-01", "rachunek_prad", "kwota", "PLN 280"),
-  ("2026-07-01", "rachunek_prad", "kwota", "PLN 245"),
+  ("2026-01-10", "rachunek_prad", "kwota", "PLN 190"),
+  ("2026-03-01", "rachunek_prad", "kwota", "PLN 230"),
+  ("2026-07-01", "rachunek_prad", "kwota", "PLN 205"),
   ("2026-02-14", "auto",          "marka", "Skoda Octavia"),
   ("2026-08-20", "auto",          "marka", "Toyota Corolla"),
   ("2026-01-05", "preferencje",   "format_odpowiedzi", "short, no preambles"),
-  ("2026-05-30", "praca",         "projekt", "sovereign agent"),
+  ("2026-05-30", "praca",         "projekt", "garden planner"),
   # … add up to 12
 ]
 ```

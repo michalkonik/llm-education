@@ -53,7 +53,7 @@ and no fog.
 ```markdown
 # Archivist
 
-You manage Michał's personal document archive in ~/dokumenty.
+You manage Anna's personal document archive in ~/dokumenty.
 
 ## What you do
 - You answer questions about documents. Always citing the file and the passage.
@@ -85,7 +85,7 @@ You manage Michał's personal document archive in ~/dokumenty.
 Matter-of-fact. No preambles like "Great question!". No summaries repeating the question.
 The answer begins with the answer.
 
-## Michał's preferences (appended over time)
+## Anna's preferences (appended over time)
 - 2026-09-24 — prefers tables to bullet lists for comparisons
 - 2026-09-28 — does not want emoji in answers about financial documents
 - 2026-10-03 — always state the currency with amounts, even when "obvious"
@@ -320,7 +320,7 @@ that would catch it.
 | **B · core change** | editing `AGENTS.md` or `GRANICE.md` | ⭐ **only you** | high |
 
 ```python
-SEKCJE_DOZWOLONE = {"SOUL.md": ["## Michał's preferences (appended over time)"]}
+SEKCJE_DOZWOLONE = {"SOUL.md": ["## Anna's preferences (appended over time)"]}
 
 def dopisz_preferencje(agent_kat, wpis: str):
     """Layer A. Append only, to a single section only, always with a date."""

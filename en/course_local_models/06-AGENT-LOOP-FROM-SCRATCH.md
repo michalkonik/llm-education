@@ -11,7 +11,7 @@
 > you want and which you would rather write yourself.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # repository directory (yours may differ)
+cd ~/llm-education   # repository directory (yours may differ)
 source rig-env.sh
 ```
 

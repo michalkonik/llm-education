@@ -1,8 +1,8 @@
 # Kurs 2: aplikacje agentowe na modelach lokalnych — indeks
 
-**Utworzony 23 września 2026. Dla Michała.**
-Kontynuacja kursu 1 — `00-KURS-INDEKS.md`, części 1–10
-(na Macu piętro wyżej, na maszynie w `../kurs_lokalne_modele/`).
+**Utworzony 23 września 2026.**
+Kontynuacja kursu 1 — [`../kurs_lokalne_modele/00-KURS-INDEKS.md`](../kurs_lokalne_modele/00-KURS-INDEKS.md),
+części 1–10.
 
 > **Cel całości.** Po tym kursie **projektujesz i utrzymujesz systemy agentowe**, a nie
 > tylko uruchamiasz agenta. Budujesz jeden rosnący system — `$OSA/` — i stawiasz
@@ -150,7 +150,7 @@ spodziewam się zobaczyć — i **pustą tabelę** na Twój wynik. Gdy się rozj
    nigdy pierwszą.
 6. **Każda decyzja dostaje ADR** z warunkiem falsyfikacji: *„jak poznam, że to była
    zła decyzja"*.
-7. **Pułapki numerowane dalej po kursie 1.** Sprzętowe P1–P18 (`TECHNIKA.md`),
+7. **Pułapki numerowane dalej po kursie 1.** Sprzętowe P1–P18 (pułapki maszyny referencyjnej),
    programowe kurs 1: P20–P52, **kurs 2: P60–P139**.
 
 ---
@@ -169,7 +169,7 @@ spodziewam się zobaczyć — i **pustą tabelę** na Twój wynik. Gdy się rozj
 ## Zanim zaczniesz
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 $LB/llama-cli --version                     # oczekuj: build z commita 987498f
 rocm-smi --showid                           # 2× R9700 + iGPU jako GPU[2]
@@ -280,13 +280,12 @@ Osiemdziesiąt pułapek. Każda ma w swojej części objaw i lekarstwo.
 
 | Ścieżka | Rola |
 | :-- | :-- |
-| `kurs2/00-INDEKS.md` | ten plik — mapa i rejestr pułapek |
-| `kurs2/01`–`19` | części kursu, po kolei |
-| `kurs2/ZRODLA.md` | **bibliografia z adnotacjami** — co z czego wzięte i gdzie użyte |
-| `kurs2/szkielet/` | startowy szkielet `$OSA/` do skopiowania |
-| `00-KURS-INDEKS.md` | ⬅️ **kurs 1** — model od środka. Mac: `../`, maszyna: `../kurs_lokalne_modele/` |
-| `TECHNIKA.md` (piętro wyżej) | procedury na tej maszynie, pułapki sprzętowe P1–P18 |
-| `HANDOFF.md` (piętro wyżej) | stan projektu |
+| `00-INDEKS.md` | ten plik — mapa i rejestr pułapek |
+| `01`–`19` | części kursu, po kolei |
+| [`ZRODLA.md`](ZRODLA.md) | **bibliografia z adnotacjami** — co z czego wzięte i gdzie użyte |
+| [`szkielet/`](szkielet/) | startowy szkielet `$OSA/` do skopiowania |
+| [`../kurs_lokalne_modele/00-KURS-INDEKS.md`](../kurs_lokalne_modele/00-KURS-INDEKS.md) | ⬅️ **kurs 1** — model od środka |
+| `../../rig-env.sh` | ścieżki do modeli i binarek, widoczne karty |
 
 **Co powstanie w trakcie:**
 

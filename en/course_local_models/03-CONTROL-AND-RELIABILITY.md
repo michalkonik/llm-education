@@ -11,7 +11,7 @@
 > stands in part 6.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # the repository directory (yours may differ)
+cd ~/llm-education   # the repository directory (yours may differ)
 source rig-env.sh
 ```
 

@@ -10,7 +10,7 @@
 > you will **understand** what the library does for you and why it sometimes does it badly.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # repository directory (yours may differ)
+cd ~/llm-education   # repository directory (yours may differ)
 source rig-env.sh
 mkdir -p $KURS      # course working directory (already there if you did part 2)
 ```
@@ -1118,27 +1118,27 @@ in retrieval. **Never guess which side to fix.**
 
 ## Final exercise
 
-1. **Index something real** — e.g. `TECHNIKA.md` and `HANDOFF.md` from your project:
+1. **Index something real** — copy your own technical notes (`*.md`) into the course folder:
    ```bash
    mkdir -p $KURS/dokumenty/projekt
-   cp ~/Desktop/local_agents_project/lokalne/TECHNIKA.md $KURS/dokumenty/projekt/
-   cp ~/Desktop/local_agents_project/lokalne/HANDOFF.md $KURS/dokumenty/projekt/
+   cp ~/path/to/your/notes/*.md $KURS/dokumenty/projekt/    # your own notes, any *.md files
    cd $KURS && python3 indeksuj.py $KURS/dokumenty/projekt
    ```
-2. **Ask about your own machine:**
+2. **Ask about your own machine.** Example questions — adapt them to what your notes actually contain:
    ```bash
    python3 odpowiedz.py "Jaki limit mocy jest ustawiony na kartach?"
-   python3 odpowiedz.py "Co to jest pułapka P4?"
-   python3 odpowiedz.py "Jakie gniazdo zasilania ma płytka F3G?"
+   python3 odpowiedz.py "Jaki sterownik i jaka wersja ROCm są zainstalowane?"
+   python3 odpowiedz.py "Co zrobić, gdy serwer modelu nie startuje po aktualizacji?"
    ```
-   (These ask: "What power limit is set on the cards?", "What is trap P4?", "What power connector does the F3G board have?")
+   (These ask: "What power limit is set on the cards?", "Which driver and ROCm version are installed?",
+   "What do I do when the model server does not start after an update?")
 
    ⭐ **This is the moment when RAG stops being an exercise.** You have a search engine over
    your own technical documentation, working offline.
 
-   ⚠️ **Check the first answer against the document.** `TECHNIKA.md` has both the old procedure (§8,
-   210 W) and a newer section §16.3 "Limit mocy 250 W — i dlaczego to NIE jest już 210 W" (the 250 W power limit — and why it is NO LONGER 210 W).
-   If the model answers "210 W", the search engine gave it only the old fragments, and it
+   ⚠️ **Check the first answer against the document.** Living notes often contain both an old
+   procedure and a newer correction of the same fact (e.g. a power limit that was later raised).
+   If the model answers with the old value, the search engine gave it only the old fragments, and it
    correctly cited them. That is a typical flaw of RAG over living documentation: **contradictory versions
    of the same fact**. Good material for exercises 3–4.
 3. **Compare the three chunking strategies** on the same set of questions. Measure recall@4

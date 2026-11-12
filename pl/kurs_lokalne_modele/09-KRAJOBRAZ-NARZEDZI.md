@@ -577,7 +577,7 @@ kupujesz**, biorąc cudzą.
 4. **Aider vs Twój agent.** To samo zadanie kodujące na tym samym modelu. Porównaj liczbę
    tur, jakość i **to, co Aider robi inaczej**. Zapisz trzy rzeczy, które od niego
    zapożyczysz.
-5. **Ustal swój stos.** Napisz w `HANDOFF.md` jedną tabelę: warstwa → wybrane narzędzie →
+5. **Ustal swój stos.** Napisz w notatkach projektu jedną tabelę: warstwa → wybrane narzędzie →
    dlaczego → co odrzuciłeś. **To jest dokument architektury Twojego produktu.**
 
 ---

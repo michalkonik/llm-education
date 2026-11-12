@@ -11,7 +11,7 @@
 > routing, your own quantization, LoRA and a plan for four cards.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # the repository directory (yours may differ)
+cd ~/llm-education   # the repository directory (yours may differ)
 source rig-env.sh
 ```
 
@@ -555,9 +555,8 @@ size.**
 ```bash
 mkdir -p $KURS/kalibracja
 
-# Gather your real domain text
-cat ~/Desktop/local_agents_project/lokalne/TECHNIKA.md \
-    ~/Desktop/local_agents_project/lokalne/HANDOFF.md \
+# Gather your real domain text (your own notes and the documents from part 4)
+cat ~/path/to/your/notes/*.md \
     $KURS/dokumenty/*.md \
     2>/dev/null > $KURS/kalibracja/domena.txt
 
@@ -842,7 +841,7 @@ ends up in host memory.
 
 ### 8.2 ⛔ P2P must stay disabled
 
-**Trap P4** from `TECHNIKA.md`: on a 4 × R9700 configuration, P2P transfers **hang the whole
+**Trap P4** (a hardware pitfall of the reference rig): on a 4 × R9700 configuration, P2P transfers **hang the whole
 host** (ROCm #11348), under both llama.cpp and vLLM.
 
 ```bash
@@ -851,11 +850,7 @@ export NCCL_P2P_DISABLE=1
 export NCCL_PROTO=Simple
 # GGML_CUDA_P2P: DO NOT SET
 
-cat >> $LLMEDU/rig-env.sh <<'EOF'
-# P4: P2P hangs the host on 4x R9700
-export NCCL_P2P_DISABLE=1
-export NCCL_PROTO=Simple
-EOF
+grep NCCL $LLMEDU/rig-env.sh    # both lines are already in rig-env.sh (multi-GPU ROCm only)
 ```
 
 ### 8.3 Two architectures to choose from

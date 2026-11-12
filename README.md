@@ -1,7 +1,7 @@
 # llm-education
 
-**Two courses on how local language models really work and how to build an agent around them
-that you can trust — plus a survey of ready-made agent harnesses.**
+**Three courses on how local language models really work, how to build an agent around them
+that you can trust and how to secure it — plus a survey of ready-made agent harnesses.**
 
 > **Structure:** the course content exists in two languages. English: [`en/`](en/). Polish (the original): [`pl/`](pl/).
 > Polish version of this page: [README_PL.md](README_PL.md).
@@ -9,6 +9,7 @@ that you can trust — plus a survey of ready-made agent harnesses.**
 ![Language: English and Polish](https://img.shields.io/badge/language-English%20%2B%20Polish-red)
 ![Course 1: 10 parts, ~47 h](https://img.shields.io/badge/course%201-10%20parts%20·%20~47%20h-blue)
 ![Course 2: 19 parts, ~102 h](https://img.shields.io/badge/course%202-19%20parts%20·%20~102%20h-blue)
+![Course 3: 15 parts, ~77 h](https://img.shields.io/badge/course%203-15%20parts%20·%20~77%20h-blue)
 ![Survey: 20 agent harnesses](https://img.shields.io/badge/survey-20%20agent%20harnesses-orange)
 ![Survey: 15 AI assistants](https://img.shields.io/badge/survey-15%20AI%20assistants-orange)
 ![License: CC BY 4.0 + MIT](https://img.shields.io/badge/license-CC%20BY%204.0%20%2B%20MIT-lightgrey)
@@ -65,6 +66,23 @@ wake up on their own, remember, are measured and cannot do you harm:
 
 ⚠️ **Start Course 2 only after part 6 of Course 1** — the whole of it stands on the agent loop that you build there.
 
+### Course 3 — [security of LLMs, agentic apps and local models](en/course_llm_security/00-INDEX.md) (`en/course_llm_security/`, Polish: [`pl/kurs_bezpieczenstwo_llm/`](pl/kurs_bezpieczenstwo_llm/00-INDEKS.md))
+
+Courses 1 and 2 teach how to build. Course 3 teaches **how what you built gets attacked, and how to make it hold**:
+from the threat model, through why a model cannot tell instructions from data, down to tokens, file formats and
+open ports. You attack a deliberately vulnerable assistant, **Sieve**, running in a lab on 127.0.0.1, measure the
+attack success rate, add a defence and measure again. The course is defensive: benign canaries, your own systems only.
+
+| Block | Parts | Topics |
+|---|---|---|
+| Foundations | 01–03 | threat landscape and modelling, **the lab and ASR**, the mechanics behind the attacks |
+| The model itself | 04–05 | jailbreaks and why alignment is not a boundary, direct injection and prompt leaks |
+| The app around the model | 06–09 | **indirect injection and RAG poisoning**, **agents and exfiltration**, MCP / skills / memory, output handling and resources |
+| Models, data, infrastructure | 10–12 | model supply chain (pickle, GGUF, templates), privacy, exposed local servers |
+| Defence as engineering | 13–15 | guardrails and red-teaming, detection and incident response, the capstone |
+
+⚠️ **Start Course 3 after part 6 of Course 1**; parts 06–09 assume Course 2's tools, memory and sandbox ideas.
+
 ### Survey — [agent harnesses for local models](en/agent-harnesses/README.md) (`en/agent-harnesses/`, Polish: [`pl/harnessy-agentowe/`](pl/harnessy-agentowe/README.md))
 
 The courses teach building from scratch. The survey answers the question of **what already exists**: a ranking of the 20 best open
@@ -95,6 +113,126 @@ for Polish professionals who cannot send data to the USA. As of 11 October 2026.
 | [04-POLAND-AND-SOVEREIGNTY](en/ai-assistants/04-POLAND-AND-SOVEREIGNTY.md) | GDPR, the AI Act, professional secrecy, competition in Poland and the EU, Polish models, hardware, opportunities |
 | [SOURCES](en/ai-assistants/SOURCES.md) | sources with the date checked |
 
+### Practice — [speeding up token generation](en/speeding-up-generation/README.md) (`en/speeding-up-generation/`, Polish: [`pl/przyspieszanie-generowania/`](pl/przyspieszanie-generowania/README.md))
+
+How I took DeepSeek-V4-Flash from 23.5 to about 50 tok/s for one agent on 4× R9700 without touching the model: **speculative decoding** with the model's own
+draft head, plus **tensor split** across the four cards — and a procedure for doing the same with any model I download later. Measured, with the failures included.
+As of 19 October 2026.
+
+| File | What is in it |
+|---|---|
+| [README](en/speeding-up-generation/README.md) | the result in one table, the three levers, what is measured and what is not |
+| [01-HOW-IT-WORKS](en/speeding-up-generation/01-HOW-IT-WORKS.md) | a lesson: why generation is slow, how speculative decoding and tensor split work, the variants |
+| [02-DEEPSEEK-DEPLOYMENT](en/speeding-up-generation/02-DEEPSEEK-DEPLOYMENT.md) | a case study: every step, every measurement, the final configuration, the traps |
+| [03-PROCEDURE-NEW-MODEL](en/speeding-up-generation/03-PROCEDURE-NEW-MODEL.md) | a runbook for the next model: decision tree, commands, gates, criteria |
+| [04-USING-UI-CLI-OPENCLAW](en/speeding-up-generation/04-USING-UI-CLI-OPENCLAW.md) | talking to the fast model: browser, terminal, agentic apps |
+| [tools/](en/speeding-up-generation/tools/README.md) | the scripts: GGUF inspection, draft search, benchmarks, a terminal chat |
+
+### Guide — [self-improving agents without regressions](en/self-improving-agents/README.md) (`en/self-improving-agents/`, Polish: [`pl/agenty-samodoskonalace/`](pl/agenty-samodoskonalace/README.md))
+
+How to build an agent that improves its own playbook, memory or skills over weeks of work without quietly breaking the version
+that already worked, and how to make it recognise when it is good enough to stop changing itself. A survey of 30+ self-improving
+systems and how they failed, the statistics of rare outcomes (why a few empty rounds prove nothing), and an architecture you can
+build: a frozen evaluator, delta edits, one change in flight, a gate cascade, shadow mode, a bandit, a sentinel and automatic
+rollback. Desk research with evidence tags, plus a standard-library calculator. As of 29 October 2026.
+
+| File | What is in it |
+|---|---|
+| [README](en/self-improving-agents/README.md) | the problem, a running example, the 15 rules, what you build |
+| [01-WHAT-CAN-IMPROVE](en/self-improving-agents/01-WHAT-CAN-IMPROVE.md) | survey: what each system changes, how it evaluates, what guards it, how it failed |
+| [02-MEASURING-WITH-RARE-EVENTS](en/self-improving-agents/02-MEASURING-WITH-RARE-EVENTS.md) | empty runs, hits needed per change, exact tests, SPRT, CUSUM, the winner's curse |
+| [03-THE-SAFE-LOOP](en/self-improving-agents/03-THE-SAFE-LOOP.md) | components, change doors, frozen evaluation assets, deltas, gates, shadow mode, bandit, rollback |
+| [04-KNOWING-WHEN-TO-STOP](en/self-improving-agents/04-KNOWING-WHEN-TO-STOP.md) | evidence-gated triggers, probation, backoff, maintenance mode, the lifecycle in code |
+| [05-PITFALLS](en/self-improving-agents/05-PITFALLS.md) | 25 failures in the order you will meet them |
+| [SOURCES](en/self-improving-agents/SOURCES.md) | sources with the date checked and how carefully |
+| [tools/](en/self-improving-agents/tools/README.md) | `rare_event_stats.py`: the arithmetic for your own hit rates |
+
+### Guide — making money around GTA 6 (moved)
+
+This guide now lives in the [financial-education](https://github.com/michal-koniu/financial-education) repository,
+next to the course on practical macroeconomics for investors: English `en/gta6-income-options/`, Polish `pl/gta6-mozliwosci-zarobku/`.
+
+### Survey — [local LLM runtimes: from the map to the source code](en/local-llm-runtimes/README.md) (`en/local-llm-runtimes/`, Polish: [`pl/silniki-lokalnych-llm/`](pl/silniki-lokalnych-llm/README.md))
+
+What llama.cpp, Ollama, LM Studio, vLLM, SGLang, MLX and oMLX, ds4, llmman and a dozen other programs for running models on your own hardware are, what they do inside,
+what they are for and how they differ — from the market map down to the data structures in the code. Plus one non-technical chapter: how they make money and who is behind them.
+Desk research and source-code reading, no benchmarks of my own. As of 19 October 2026. The English text was translated from the Polish original by the local DeepSeek model and checked mechanically.
+
+| File | What is in it |
+|---|---|
+| [README](en/local-llm-runtimes/README.md) | the course map, ten surprises, how to read it |
+| [01-MAP-AND-LAYERS](en/local-llm-runtimes/01-MAP-AND-LAYERS.md) | seven layers from weights file to chat window, project tables, dependency web, timeline |
+| [02-HOW-INFERENCE-WORKS](en/local-llm-runtimes/02-HOW-INFERENCE-WORKS.md) | prefill and decoding, KV cache, MoE, batching, parallelism, speculation, sampling, glossary |
+| [03-QUANTIZATION-AND-FORMATS](en/local-llm-runtimes/03-QUANTIZATION-AND-FORMATS.md) | what is inside a GGUF file, quantization families, quality tables, analysis of the DeepSeek file |
+| [04-LLAMA-CPP-AND-THE-GGML-FAMILY](en/local-llm-runtimes/04-LLAMA-CPP-AND-THE-GGML-FAMILY.md) | ggml, GGUF, `llama-server` internals, multi-GPU split modes, HIP; ik_llama.cpp, llamafile, llama-swap |
+| [05-PACKAGED-RUNTIMES-OLLAMA-LM-STUDIO-AND-OTHERS](en/local-llm-runtimes/05-PACKAGED-RUNTIMES-OLLAMA-LM-STUDIO-AND-OTHERS.md) | Ollama, LM Studio, llmman, Jan, LocalAI, Lemonade, Docker Model Runner, RamaLama |
+| [06-SERVING-ENGINES-VLLM-SGLANG](en/local-llm-runtimes/06-SERVING-ENGINES-VLLM-SGLANG.md) | vLLM, SGLang, TensorRT-LLM, TGI; status on AMD gfx1201 |
+| [07-APPLE-MLX-OMLX-AND-DS4](en/local-llm-runtimes/07-APPLE-MLX-OMLX-AND-DS4.md) | unified memory, MLX, mlx-lm, oMLX, ds4, exo |
+| [08-SPECIALISTS-KTRANSFORMERS-AND-OTHERS](en/local-llm-runtimes/08-SPECIALISTS-KTRANSFORMERS-AND-OTHERS.md) | KTransformers, mistral.rs, MLC, NPU stacks |
+| [09-COMPARISON-AND-CHOICE](en/local-llm-runtimes/09-COMPARISON-AND-CHOICE.md) | matrix, scenarios, what runs on gfx1201, experiments |
+| [10-MONEY-AND-PEOPLE](en/local-llm-runtimes/10-MONEY-AND-PEOPLE.md) | **non-technical:** business models, funding, people, licences, dependency risks |
+| [SOURCES](en/local-llm-runtimes/SOURCES.md) | sources, pinned commits, the weakest-verified points |
+
+### Survey — [cheap and free online models for agents](en/cheap-free-models/README.md) (`en/cheap-free-models/`, Polish: [`pl/tanie-i-darmowe-modele/`](pl/tanie-i-darmowe-modele/README.md))
+
+The third leg next to frontier APIs and local models: where to get online inference for little or no money on models at
+least as smart as a local DeepSeek-V4-Flash, and how far it can be trusted in an agent loop. The top 20 routes, which
+models really clear the bar, and how to wire them into agentic apps. As of 13 October 2026.
+
+| File | What is in it |
+|---|---|
+| [README](en/cheap-free-models/README.md) | the short answer, the top 20 ranking, scoring, which route for which job |
+| [01-PROFILES](en/cheap-free-models/01-PROFILES.md) | 20 profiles: prices, limits, terms, how to call each route |
+| [02-MODELS](en/cheap-free-models/02-MODELS.md) | which models are really at least as smart as DeepSeek-V4-Flash, on one index version |
+| [03-AGENTIC-USE](en/cheap-free-models/03-AGENTIC-USE.md) | a LiteLLM router config, free-tier quotas, cost math, quality traps, a 15-minute acceptance test |
+| [SOURCES](en/cheap-free-models/SOURCES.md) | sources with the date checked |
+
+### Survey — [AI income asymmetries](en/ai-income-asymmetries/README.md) (`en/ai-income-asymmetries/`, Polish: [`pl/asymetrie-zarobkowe-ai/`](pl/asymetrie-zarobkowe-ai/README.md))
+
+Where can an agentic app on a hybrid setup earn money online without founding a company: 22 candidates (bounties,
+contests, prediction markets, arbitrage, paid manual work, compute rental and more), each checked for whether manual
+work is still paid that agents can now do faster. Legality and tax checked for a Polish resident. As of 14 October 2026.
+
+| File | What is in it |
+|---|---|
+| [README](en/ai-income-asymmetries/README.md) | the short answer, the top 10, scoring, where to start, rejected candidates |
+| [01-OPPORTUNITIES](en/ai-income-asymmetries/01-OPPORTUNITIES.md) | the top 10 opportunities, profile by profile |
+| [02-HYBRID-ARCHITECTURE](en/ai-income-asymmetries/02-HYBRID-ARCHITECTURE.md) | one hybrid agent pattern: routing local vs paid, cost math, safety rails |
+| [03-RULES-TAX-RISKS](en/ai-income-asymmetries/03-RULES-TAX-RISKS.md) | Polish tax, reporting, gambling and security-work rules, platform terms, operational risks |
+| [SOURCES](en/ai-income-asymmetries/SOURCES.md) | sources with the date checked |
+
+### Survey — [AI business asymmetries](en/ai-business-asymmetries/README.md) (`en/ai-business-asymmetries/`, Polish: [`pl/asymetrie-biznesowe-ai/`](pl/asymetrie-biznesowe-ai/README.md))
+
+Where AI adoption is still low enough that a small team with agentic apps and local open models can build a business
+before the incumbents catch up: 26 candidates across Poland, the EU and global markets, each argued against from five
+angles before scoring. As of 14 October 2026.
+
+| File | What is in it |
+|---|---|
+| [README](en/ai-business-asymmetries/README.md) | the short answer, the top 15, scoring, the challenge, where to start |
+| [01-ADOPTION-GAPS](en/ai-business-asymmetries/01-ADOPTION-GAPS.md) | where AI adoption is still low: Eurostat and GUS data by country, size and sector |
+| [02-OPPORTUNITIES](en/ai-business-asymmetries/02-OPPORTUNITIES.md) | the top 15 opportunities, profile by profile |
+| [03-LOCAL-FIRST](en/ai-business-asymmetries/03-LOCAL-FIRST.md) | why buyers want local, good-enough open models, hardware tiers, local vs API cost |
+| [SOURCES](en/ai-business-asymmetries/SOURCES.md) | sources with the date checked |
+
+### Business track — [pricing a private AI box](en/course_pricing_ai_box/00-INDEX.md) (`en/course_pricing_ai_box/`, Polish: [`pl/kurs_wycena_ai_box/`](pl/kurs_wycena_ai_box/00-INDEKS.md))
+
+A price book for the on-premise AI box for Polish professional offices, where every number has a source: the cost
+floor, the value ceiling for a law office, the expert-agent catalogue as the growth engine, four hardware models and
+your cash, willingness-to-pay conversations in Polish, and how the price list looks to an investor. With a
+standard-library calculator (`floor`, `value`, `cash`, `vw`, `gg`, `nrr`). As of 25 October 2026.
+
+| Part | Topic | What you produce |
+|---|---|---|
+| [01](en/course_pricing_ai_box/01-PRICING-FOUNDATIONS.md) | Foundations | a pre-registered gut price, three anchors |
+| [02](en/course_pricing_ai_box/02-COST-FLOOR.md) | Cost floor | COGS per office, a margin target |
+| [03](en/course_pricing_ai_box/03-VALUE-CEILING.md) | Value ceiling | economic value for three offices, the first target customer |
+| [04](en/course_pricing_ai_box/04-VALUE-METRIC-AND-PACKAGING.md) | Value metric | the agent catalogue, good/better/best packages |
+| [05](en/course_pricing_ai_box/05-HARDWARE-AND-CASH.md) | Hardware and cash | the hardware model and your cash need |
+| [06](en/course_pricing_ai_box/06-WILLINGNESS-TO-PAY.md) | Willingness to pay | an interview kit, Van Westendorp, a paid pilot |
+| [07](en/course_pricing_ai_box/07-PRICE-BOOK-AND-TERMS.md) | Price book | `price-book-v1.md` with discounts and terms |
+| [08](en/course_pricing_ai_box/08-PRICING-FOR-SCALE-AND-INVESTORS.md) | Scale | ARR, NRR and the bootstrapped-or-venture decision |
+
 ---
 
 ## Getting started
@@ -106,11 +244,12 @@ source rig-env.sh        # sets the paths for the courses, models and llama.cpp
 ```
 
 Then open [part 1 of Course 1](en/course_local_models/LOCAL-MODELS-FUNDAMENTALS.md). Every lesson begins with
-`source rig-env.sh` in the repository directory — the lesson commands contain my path
-(`~/Desktop/github_repos/llm-education`), yours may be different.
+`source rig-env.sh` in the repository directory — the lesson commands assume the repo is at `~/llm-education`;
+adjust if yours differs.
 
 **Adapt `rig-env.sh` to your machine:** the paths to the models (`$M`, `$BIELIK`, …), to llama.cpp (`$LB`)
-and the visible cards (`HIP_VISIBLE_DEVICES`).
+and the visible cards (`HIP_VISIBLE_DEVICES`). It is a template: edit the defaults at the top, or set any of these
+variables in your shell before `source rig-env.sh`.
 
 ## Where files are created
 
@@ -134,7 +273,9 @@ Everything the courses create is created **inside the repository**, in directori
 - **secrets** (`~/.config/osa/sekrety.json`, permissions 0600) — secrets are not kept in the repository,
   not even an ignored one;
 - **the socket** (`~/.local/run/osa.sock`) — a socket path has a limit of 108 characters;
-- **Your data** that the agents work on (`~/dokumenty`, `~/skany`) — these are your files, not products of the course.
+- **Your data** that the agents work on (`~/dokumenty`, `~/skany`) — these are your files, not products of the course;
+- **the business track's working folder** (`~/founder/`) — your price notes and data about real customers are
+  private and never go into a public repository.
 
 ## Hardware and software
 
@@ -164,8 +305,9 @@ Everything the courses create is created **inside the repository**, in directori
 
 ## License
 
-Lesson content: **CC BY 4.0** — you may copy, modify and use it, also commercially, with attribution to the author.
-Code (the snippets in the lessons, `rig-env.sh`, `skeleton/`): **MIT**. Details: [LICENSE.md](LICENSE.md).
+The whole repository is licensed: all content (lessons, surveys, guides - every `*.md`, both languages) under **CC BY 4.0** —
+you may copy, modify and use it, also commercially, with attribution to the author. All code (scripts, `rig-env.sh`,
+`skeleton/`, `narzedzia/`, `tools/`, snippets in the lessons): **MIT**. Details: [LICENSE.md](LICENSE.md).
 
 Found a mistake, or does your measurement say something different from the lesson? Open an issue — that is exactly why
 the lessons have tables for measurements.

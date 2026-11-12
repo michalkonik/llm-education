@@ -10,7 +10,7 @@
 > **rozumiał**, co robi za Ciebie biblioteka i dlaczego czasem robi to źle.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 mkdir -p $KURS      # katalog roboczy kursu (jest już, jeśli robiłeś część 2)
 ```
@@ -1099,25 +1099,24 @@ w wyszukiwaniu. **Nigdy nie zgaduj, którą stronę naprawiać.**
 
 ## Ćwiczenie końcowe
 
-1. **Zaindeksuj coś prawdziwego** — np. `TECHNIKA.md` i `HANDOFF.md` ze swojego projektu:
+1. **Zaindeksuj coś prawdziwego** — skopiuj własne notatki techniczne (`*.md`) do katalogu kursu:
    ```bash
    mkdir -p $KURS/dokumenty/projekt
-   cp ~/Desktop/local_agents_project/lokalne/TECHNIKA.md $KURS/dokumenty/projekt/
-   cp ~/Desktop/local_agents_project/lokalne/HANDOFF.md $KURS/dokumenty/projekt/
+   cp ~/sciezka/do/twoich/notatek/*.md $KURS/dokumenty/projekt/    # Twoje notatki, dowolne pliki *.md
    cd $KURS && python3 indeksuj.py $KURS/dokumenty/projekt
    ```
-2. **Zapytaj o własną maszynę:**
+2. **Zapytaj o własną maszynę.** Przykładowe pytania — dostosuj je do tego, co naprawdę jest w Twoich notatkach:
    ```bash
    python3 odpowiedz.py "Jaki limit mocy jest ustawiony na kartach?"
-   python3 odpowiedz.py "Co to jest pułapka P4?"
-   python3 odpowiedz.py "Jakie gniazdo zasilania ma płytka F3G?"
+   python3 odpowiedz.py "Jaki sterownik i jaka wersja ROCm są zainstalowane?"
+   python3 odpowiedz.py "Co zrobić, gdy serwer modelu nie startuje po aktualizacji?"
    ```
    ⭐ **To jest moment, w którym RAG przestaje być ćwiczeniem.** Masz wyszukiwarkę po
    własnej dokumentacji technicznej, działającą offline.
 
-   ⚠️ **Sprawdź pierwszą odpowiedź z dokumentem.** `TECHNIKA.md` ma i starą procedurę (§8,
-   210 W), i nowszą sekcję §16.3 „Limit mocy 250 W — i dlaczego to NIE jest już 210 W".
-   Jeśli model odpowiada „210 W", wyszukiwarka podała mu tylko stare fragmenty, a on
+   ⚠️ **Sprawdź pierwszą odpowiedź z dokumentem.** Żywe notatki często zawierają i starą procedurę,
+   i nowszą poprawkę tego samego faktu (np. limit mocy, który później podniesiono).
+   Jeśli model odpowiada starą wartością, wyszukiwarka podała mu tylko stare fragmenty, a on
    poprawnie je zacytował. To typowa wada RAG-u na żywej dokumentacji: **sprzeczne wersje
    tego samego faktu**. Dobry materiał na ćwiczenia 3–4.
 3. **Porównaj trzy strategie chunkingu** na tym samym zbiorze pytań. Zmierz recall@4

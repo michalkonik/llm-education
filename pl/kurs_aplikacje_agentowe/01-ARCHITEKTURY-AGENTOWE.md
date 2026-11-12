@@ -407,7 +407,7 @@ jako adapter doklejony z boku. U Ciebie to jest **rdzeń, a nie wtyczka**.
 razy** (bo interesuje Cię powtarzalność, nie jednorazowy sukces):
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 mkdir -p $OSA/pomiary
 ```

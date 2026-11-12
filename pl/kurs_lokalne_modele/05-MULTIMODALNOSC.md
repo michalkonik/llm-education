@@ -10,7 +10,7 @@
 > zrozumiesz każdy kawałek, potem połączysz je w jedną pętlę.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 ```
 
@@ -79,7 +79,7 @@ Masz wejście audio na płycie (`ALC1220`), ale **nie masz mikrofonu ani kamery*
 💡 **Kluczowa rada techniczna:** Whisper pracuje na **16 kHz mono**. Nie potrzebujesz
 mikrofonu studyjnego — potrzebujesz **czystego sygnału bez szumu tła**. Zestaw słuchawkowy
 USB za 200 zł da lepsze wyniki STT niż mikrofon pojemnościowy za 800 zł stojący metr od
-wentylatorów czterech kart grafiki. **A Twoja maszyna jest głośna.**
+wentylatorów czterech kart grafiki. **A maszyna z wieloma kartami jest głośna.**
 
 ⚠️ **To jest realny problem, nie teoria.** Cztery karty R9700 pod obciążeniem to solidny
 szum. Mikrofon wszechkierunkowy na biurku nagra wentylatory i Whisper będzie halucynował.
@@ -388,7 +388,7 @@ sudo apt install -y ffmpeg sox libsox-fmt-all v4l-utils
 
 ### 4.2 Sklonuj i zbuduj na ROCm
 
-⚠️ **To są flagi z `TECHNIKA.md` §12** — te same, których użyłeś do llama.cpp.
+⚠️ **To te same flagi budowania z HIP, których użyłeś do llama.cpp** (część 1).
 **Nie zmieniaj ich**, inaczej wyjdzie budowa na CPU.
 
 ```bash
@@ -419,7 +419,7 @@ $WB/whisper-cli --help | head -20
 export ROCM_PATH=/opt/rocm
 export HIP_PATH=/opt/rocm
 ```
-i powtórz `cmake`. Zapisz, co zadziałało, do `TECHNIKA.md` — tak jak przy llama.cpp.
+i powtórz `cmake`. Zapisz, co zadziałało, we własnych notatkach o maszynie — tak jak przy llama.cpp.
 
 ### 4.3 Pobierz model Whispera
 

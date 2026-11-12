@@ -1,6 +1,6 @@
 # Course: from a model to your own agent — index
 
-**Created: 22 September 2026.** For Michał.
+**Created: 22 September 2026.**
 
 > **Purpose of the whole thing.** After working through this course you can **build from scratch
 > your own agent in the OpenClaw / Claude Code class** — a loop that reads files, writes code,
@@ -77,38 +77,15 @@ except for part 9, which you can read at any time.**
 **The llama.cpp binaries are not in `PATH`.** Run this once per terminal session:
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # the repository directory (yours may differ)
+cd ~/llm-education   # the repository directory (yours may differ)
 source rig-env.sh
 ```
 
-Create this file once:
+Edit `rig-env.sh` in the repo root (variables at the top): the paths to your models (`$M`, `$BIELIK`, …),
+to llama.cpp (`$LB`) and the cards you want to use (`HIP_VISIBLE_DEVICES`). Each variable can also be set
+in your shell before `source rig-env.sh` — the file only fills in defaults. Then check:
 
 ```bash
-cat > $LLMEDU/rig-env.sh <<'EOF'
-# Binaries
-export LB=~/llama.cpp/build/bin
-export WB=$NARZEDZIA/whisper.cpp/build/bin          # after part 5
-
-# Models
-export M=~/models
-export BIELIK=$M/bielik-11b/Bielik-11B-v3.0-Instruct.Q8_0.gguf
-export OSS20=$M/gpt-oss-20b/gpt-oss-20b-MXFP4.gguf
-export QWEN32=$M/qwen3-32b/Qwen_Qwen3-32B-Q4_K_M.gguf
-export QWEN80=$M/qwen3-next-80b/Q4_1/Qwen3-Next-80B-A3B-Instruct-Q4_1-00001-of-00002.gguf
-export DRAFT=$M/gpt-oss-120b/eagle3-gpt-oss-120b-Q8_0.gguf
-export EMB=$M/embed/bge-m3-f16.gguf        # after part 4
-export VL=$M/vl/Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf          # after part 5
-export VLMM=$M/vl/mmproj-Qwen2.5-VL-7B-Instruct-f16.gguf    # after part 5
-export WMODEL=$NARZEDZIA/whisper.cpp/models/ggml-large-v3-turbo.bin  # after part 5
-
-# P12/P32: the iGPU is GPU[2] — exclude it
-export HIP_VISIBLE_DEVICES=0,1
-
-# P4: P2P hangs the host with 4 cards
-export NCCL_P2P_DISABLE=1
-export NCCL_PROTO=Simple
-EOF
-
 source $LLMEDU/rig-env.sh
 $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 ```
@@ -134,8 +111,8 @@ $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 3. **Every command has an explanation of what it does and what output to expect.**
 4. **Every chapter ends with an exercise that actually produces something.**
 5. **Do not optimize without measuring.** Every lever in part 8 has a number before and after.
-6. **Pitfalls (`P…`) are numbered jointly with `TECHNIKA.md`.** Hardware: P1–P18.
-   **Software, from this course: P20–P52.**
+6. **Pitfalls (`P…`) share one numbering.** P1–P18 are hardware pitfalls of the reference rig (the few that
+   matter are explained where they occur). **Software, from this course: P20–P52.**
 
 ---
 
@@ -183,11 +160,8 @@ $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 
 | File | Role |
 | :-- | :-- |
-| `HANDOFF.md` | **project state** — what is done, what is next |
-| `TECHNIKA.md` | **procedures on this machine** — inventory, hardware pitfalls P1–P18 |
-| `KARTY-3-I-4-PLAN-PODLACZENIA.md` | expansion to 4 cards |
 | **course `00`–`10`** | **how it works and how to build an agent on it** |
-| `BIZNES.md` | thesis, market, product |
+| `rig-env.sh` (repo root) | paths to models and binaries, visible cards |
 
 **Directories that will appear during the course:**
 
@@ -222,7 +196,7 @@ devices: `GPU[0]`, `GPU[1]` are the R9700 cards (34.2 GB each), `GPU[2]` is the 
 graphics with 2 GB**. Small models can land there and run 50× slower.
 **`HIP_VISIBLE_DEVICES=0,1` is in `rig-env.sh` precisely for this reason.**
 
-⚠️ **After adding cards 3 and 4 the numbering will change again (P13).** Remap it with
+⚠️ **If you add more GPUs, the numbering will change again.** Remap it with
 `amd-smi list` and update `rig-env.sh`.
 
 ---
@@ -233,7 +207,7 @@ graphics with 2 GB**. Small models can land there and run 50× slower.
 
 ## After this course: course 2
 
-**`course_agentic_apps/00-INDEX.md`** — ⭐ **agentic applications on local models.**
+**[`../course_agentic_apps/00-INDEX.md`](../course_agentic_apps/00-INDEX.md)** — ⭐ **agentic applications on local models.**
 Nineteen parts, ~102 h. Course 1 teaches **how a model works**. Course 2 teaches
 **how to build a system around it that can be trusted**:
 

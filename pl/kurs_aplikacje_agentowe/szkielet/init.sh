@@ -38,5 +38,5 @@ for u in systemd/*.service; do
 done
 
 echo
-echo "✓ gotowe. Dalej: kurs2/01-ARCHITEKTURY-AGENTOWE.md"
+echo "✓ gotowe. Dalej: ${LLMEDU:-<repozytorium llm-education>}/pl/kurs_aplikacje_agentowe/01-ARCHITEKTURY-AGENTOWE.md"
 echo "  systemd:  cp systemd/wygenerowane/*.service ~/.config/systemd/user/ && systemctl --user daemon-reload"

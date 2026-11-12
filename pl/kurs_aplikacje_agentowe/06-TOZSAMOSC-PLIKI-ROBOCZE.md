@@ -53,7 +53,7 @@ i bez mgły.
 ```markdown
 # Archiwista
 
-Zarządzasz osobistym archiwum dokumentów Michała w ~/dokumenty.
+Zarządzasz osobistym archiwum dokumentów Anny w ~/dokumenty.
 
 ## Co robisz
 - Odpowiadasz na pytania o dokumenty. Zawsze z podaniem pliku i fragmentu.
@@ -85,7 +85,7 @@ Zarządzasz osobistym archiwum dokumentów Michała w ~/dokumenty.
 Rzeczowy. Bez wstępów typu „Świetne pytanie!". Bez podsumowań powtarzających pytanie.
 Odpowiedź zaczyna się od odpowiedzi.
 
-## Preferencje Michała (dopisywane w czasie)
+## Preferencje Anny (dopisywane w czasie)
 - 2026-09-24 — woli tabele od list punktowanych przy porównaniach
 - 2026-09-28 — nie chce emoji w odpowiedziach o dokumentach finansowych
 - 2026-10-03 — przy kwotach zawsze podawaj walutę, nawet gdy „oczywista"
@@ -320,7 +320,7 @@ który by to złapał.
 | **B · zmiana rdzenia** | edycja `AGENTS.md` lub `GRANICE.md` | ⭐ **wyłącznie Ty** | wysokie |
 
 ```python
-SEKCJE_DOZWOLONE = {"SOUL.md": ["## Preferencje Michała (dopisywane w czasie)"]}
+SEKCJE_DOZWOLONE = {"SOUL.md": ["## Preferencje Anny (dopisywane w czasie)"]}
 
 def dopisz_preferencje(agent_kat, wpis: str):
     """Warstwa A. Tylko dopisanie, tylko do jednej sekcji, zawsze z datą."""

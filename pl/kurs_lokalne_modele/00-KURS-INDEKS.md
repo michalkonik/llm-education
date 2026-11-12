@@ -1,6 +1,6 @@
 # Kurs: od modelu do własnego agenta — indeks
 
-**Utworzony: 22 września 2026.** Dla Michała.
+**Utworzony: 22 września 2026.**
 
 > **Cel całości.** Po przejściu tego kursu potrafisz **zbudować od zera własnego agenta
 > klasy OpenClaw / Claude Code** — pętlę, która czyta pliki, pisze kod, uruchamia polecenia,
@@ -77,38 +77,16 @@ którą możesz czytać kiedykolwiek.**
 **Binarki llama.cpp nie są w `PATH`.** Wykonaj to raz na sesję terminala:
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # katalog repozytorium (u Ciebie może być inny)
+cd ~/llm-education   # katalog repozytorium (u Ciebie może być inny)
 source rig-env.sh
 ```
 
-Utwórz ten plik raz:
+Edytuj `rig-env.sh` w katalogu głównym repozytorium (zmienne są na górze pliku): ścieżki do Twoich modeli
+(`$M`, `$BIELIK`, …), do llama.cpp (`$LB`) i karty, których chcesz używać (`HIP_VISIBLE_DEVICES`). Każdą
+zmienną możesz też ustawić w powłoce przed `source rig-env.sh` — plik uzupełnia tylko wartości domyślne.
+Potem sprawdź:
 
 ```bash
-cat > $LLMEDU/rig-env.sh <<'EOF'
-# Binarki
-export LB=~/llama.cpp/build/bin
-export WB=$NARZEDZIA/whisper.cpp/build/bin          # po części 5
-
-# Modele
-export M=~/models
-export BIELIK=$M/bielik-11b/Bielik-11B-v3.0-Instruct.Q8_0.gguf
-export OSS20=$M/gpt-oss-20b/gpt-oss-20b-MXFP4.gguf
-export QWEN32=$M/qwen3-32b/Qwen_Qwen3-32B-Q4_K_M.gguf
-export QWEN80=$M/qwen3-next-80b/Q4_1/Qwen3-Next-80B-A3B-Instruct-Q4_1-00001-of-00002.gguf
-export DRAFT=$M/gpt-oss-120b/eagle3-gpt-oss-120b-Q8_0.gguf
-export EMB=$M/embed/bge-m3-f16.gguf        # po części 4
-export VL=$M/vl/Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf          # po części 5
-export VLMM=$M/vl/mmproj-Qwen2.5-VL-7B-Instruct-f16.gguf    # po części 5
-export WMODEL=$NARZEDZIA/whisper.cpp/models/ggml-large-v3-turbo.bin  # po części 5
-
-# P12/P32: iGPU jest GPU[2] — wyklucz ją
-export HIP_VISIBLE_DEVICES=0,1
-
-# P4: P2P zawiesza host przy 4 kartach
-export NCCL_P2P_DISABLE=1
-export NCCL_PROTO=Simple
-EOF
-
 source $LLMEDU/rig-env.sh
 $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 ```
@@ -134,8 +112,8 @@ $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 3. **Każde polecenie ma wytłumaczone, co robi i jakiego wyjścia oczekiwać.**
 4. **Każdy rozdział kończy się ćwiczeniem, które coś realnie produkuje.**
 5. **Nie optymalizuj bez pomiaru.** Każda dźwignia w części 8 ma liczbę przed i po.
-6. **Pułapki (`P…`) numerowane wspólnie z `TECHNIKA.md`.** Sprzętowe: P1–P18.
-   **Programowe z tego kursu: P20–P52.**
+6. **Pułapki (`P…`) mają wspólną numerację.** P1–P18 to pułapki sprzętowe maszyny referencyjnej (te, które
+   mają znaczenie, są objaśnione tam, gdzie występują). **Programowe z tego kursu: P20–P52.**
 
 ---
 
@@ -183,11 +161,8 @@ $LB/llama-cli --version    # → 0.4.1-dev (build 1, commit 987498f)
 
 | Plik | Rola |
 | :-- | :-- |
-| `HANDOFF.md` | **stan projektu** — co zrobione, co następne |
-| `TECHNIKA.md` | **procedury na tej maszynie** — inwentarz, pułapki sprzętowe P1–P18 |
-| `KARTY-3-I-4-PLAN-PODLACZENIA.md` | rozbudowa do 4 kart |
 | **kurs `00`–`10`** | **jak to działa i jak zbudować na tym agenta** |
-| `BIZNES.md` | teza, rynek, produkt |
+| `rig-env.sh` (katalog główny repo) | ścieżki do modeli i binarek, widoczne karty |
 
 **Katalogi, które powstaną w trakcie kursu:**
 
@@ -222,7 +197,7 @@ urządzenia: `GPU[0]`, `GPU[1]` to karty R9700 (34,2 GB każda), `GPU[2]` to **z
 grafika z 2 GB**. Małe modele potrafią tam wylądować i działać 50× wolniej.
 **`HIP_VISIBLE_DEVICES=0,1` jest w `rig-env.sh` właśnie po to.**
 
-⚠️ **Po dołożeniu kart 3 i 4 numeracja zmieni się znowu (P13).** Przemapuj przez
+⚠️ **Jeśli dołożysz kolejne karty, numeracja zmieni się znowu.** Przemapuj przez
 `amd-smi list` i zaktualizuj `rig-env.sh`.
 
 ---
@@ -233,7 +208,7 @@ grafika z 2 GB**. Małe modele potrafią tam wylądować i działać 50× wolnie
 
 ## Po tym kursie: kurs 2
 
-**`kurs2/00-INDEKS.md`** — ⭐ **aplikacje agentowe na modelach lokalnych.**
+**[`../kurs_aplikacje_agentowe/00-INDEKS.md`](../kurs_aplikacje_agentowe/00-INDEKS.md)** — ⭐ **aplikacje agentowe na modelach lokalnych.**
 Dziewiętnaście części, ~102 h. Kurs 1 uczy, **jak działa model**. Kurs 2 uczy,
 **jak zbudować wokół niego system, któremu można zaufać**:
 

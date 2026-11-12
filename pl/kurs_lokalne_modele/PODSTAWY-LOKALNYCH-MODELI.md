@@ -1,10 +1,10 @@
 # Lokalne modele od podstaw — kurs praktyczny
 
 **Utworzony: 20 września 2026.**
-Dla Michała, do nauki „od zera do zrozumienia", **polecenie po poleceniu**.
+Do nauki „od zera do zrozumienia", **polecenie po poleceniu**.
 
-> **Czym ten plik różni się od pozostałych.**
-> `HANDOFF.md` mówi *co jest zrobione*. `TECHNIKA.md` mówi *jak wykonać procedurę na tej
+> **Czym ten plik różni się od Twoich notatek.**
+> Notatki o projekcie mówią *co jest zrobione*; notatki o maszynie mówią *jak wykonać procedurę na tej
 > konkretnej maszynie*. **Ten plik tłumaczy, jak to wszystko działa** — żebyś nie wykonywał
 > poleceń na pamięć, tylko rozumiał, co się dzieje pod spodem.
 >

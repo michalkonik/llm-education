@@ -10,7 +10,7 @@
 > you will understand each piece, then you will join them into a single loop.
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # repository directory (yours may differ)
+cd ~/llm-education   # repository directory (yours may differ)
 source rig-env.sh
 ```
 
@@ -79,7 +79,7 @@ You have an audio input on the board (`ALC1220`), but **you have no microphone o
 💡 **The key technical tip:** Whisper works on **16 kHz mono**. You do not need
 a studio microphone — you need a **clean signal without background noise**. A USB
 headset for PLN 200 will give better STT results than a condenser microphone for PLN 800 standing a metre from
-the fans of four graphics cards. **And your machine is loud.**
+the fans of four graphics cards. **And a multi-GPU machine is loud.**
 
 ⚠️ **This is a real problem, not theory.** Four R9700 cards under load make serious
 noise. An omnidirectional microphone on the desk will record the fans and Whisper will hallucinate.
@@ -394,7 +394,7 @@ sudo apt install -y ffmpeg sox libsox-fmt-all v4l-utils
 
 ### 4.2 Clone and build on ROCm
 
-⚠️ **These are the flags from `TECHNIKA.md` §12** — the same ones you used for llama.cpp.
+⚠️ **These are the same HIP build flags you used for llama.cpp** (part 1).
 **Do not change them**, or you will end up with a CPU build.
 
 ```bash
@@ -425,7 +425,7 @@ $WB/whisper-cli --help | head -20
 export ROCM_PATH=/opt/rocm
 export HIP_PATH=/opt/rocm
 ```
-and repeat `cmake`. Write down what worked in `TECHNIKA.md` — just as with llama.cpp.
+and repeat `cmake`. Write down what worked in your own machine notes — just as with llama.cpp.
 
 ### 4.3 Download a Whisper model
 

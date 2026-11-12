@@ -15,10 +15,10 @@ prawie żaden.
    → wyszukanie faktu.                           łatwe
 
 2. „Ile płacę za prąd?"
-   → było 210 zł, potem 280 zł, od lipca 245 zł.
+   → było 190 zł, potem 230 zł, od lipca 205 zł.
      Która odpowiedź jest poprawna?              trudne
 
-3. „Ile płaciłem za prąd w kwietniu?"
+3. „Ile płaciłam za prąd w kwietniu?"
    → fakt, który JUŻ NIE JEST prawdziwy,
      ale WTEDY był.                              bardzo trudne
 ```
@@ -46,10 +46,10 @@ w architekturze — i wynika prawie w całości z odpowiedzi na pytanie 3.
 
 ```markdown
 # MEMORY.md
-- Michał, Kraków, strefa Europe/Warsaw
-- Pracuje nad projektem „suwerenny agent" — agenty lokalne dla zawodów regulowanych
+- Anna, Poznań, strefa Europe/Warsaw
+- Pracuje nad projektem „planer ogrodu" — mała aplikacja dla działkowców
 - Nie znosi odpowiedzi zaczynających się od „Świetne pytanie!"
-- Rachunek za prąd: 245 zł (od lipca 2026; wcześniej 280 zł)
+- Rachunek za prąd: 205 zł (od lipca 2026; wcześniej 230 zł)
 ```
 
 | Zalety | Wady |
@@ -97,10 +97,10 @@ Tu jest ta różnica 22 punktów. **Każdy fakt niesie cztery znaczniki czasu, n
 ```
 
 ```
-Rachunek za prąd = 280 zł   ważny 2026-03-01 … 2026-06-30
+Rachunek za prąd = 230 zł   ważny 2026-03-01 … 2026-06-30
                             zapisany 2026-03-05, unieważniony 2026-07-02
 
-Rachunek za prąd = 245 zł   ważny 2026-07-01 … (nadal)
+Rachunek za prąd = 205 zł   ważny 2026-07-01 … (nadal)
                             zapisany 2026-07-02
 ```
 
@@ -108,12 +108,12 @@ Teraz **wszystkie trzy pytania z §0 mają jednoznaczną odpowiedź**:
 
 ```sql
 -- „Ile płacę teraz?"           → ważny_od ≤ dziś < ważny_do
--- „Ile płaciłem w kwietniu?"   → ważny_od ≤ 2026-04-15 < ważny_do   → 280 zł
+-- „Ile płaciłam w kwietniu?"   → ważny_od ≤ 2026-04-15 < ważny_do   → 230 zł
 -- „Co system wiedział w maju?" → zapisany ≤ 2026-05-01 < unieważniony
 ```
 
 **Trzecie zapytanie jest tym, które ratuje Cię przy debugowaniu.** „Dlaczego agent
-powiedział w maju 280 zł?" → bo wtedy to była jego najlepsza wiedza. **To nie był
+powiedział w maju 230 zł?" → bo wtedy to była jego najlepsza wiedza. **To nie był
 błąd.** Bez czasu systemu nie odróżnisz pomyłki agenta od nieaktualnych danych — a to
 zupełnie różne diagnozy.
 
@@ -263,13 +263,13 @@ Historia jest kompletna i **nie da się jej zgubić przypadkiem**.
 
 ```python
 m = Magazyn("/tmp/test.db")
-m.zapisz("michal", "rachunek_prad", "kwota", "280 zł", wazny_od="2026-03-01")
-m.zapisz("michal", "rachunek_prad", "kwota", "245 zł", wazny_od="2026-07-01")
+m.zapisz("anna", "rachunek_prad", "kwota", "230 zł", wazny_od="2026-03-01")
+m.zapisz("anna", "rachunek_prad", "kwota", "205 zł", wazny_od="2026-07-01")
 
-print(m.czytaj("michal", "rachunek_prad")[0]["obiekt"])                    # 245 zł
-print(m.czytaj("michal", "rachunek_prad", na_moment="2026-04-15")[0]["obiekt"])  # 280 zł
-print(m.czytaj("michal", "rachunek_prad", wiedza_z="2026-05-01")[0]["obiekt"])   # 280 zł
-for h in m.historia("michal", "rachunek_prad", "kwota"): print(h)
+print(m.czytaj("anna", "rachunek_prad")[0]["obiekt"])                    # 205 zł
+print(m.czytaj("anna", "rachunek_prad", na_moment="2026-04-15")[0]["obiekt"])  # 230 zł
+print(m.czytaj("anna", "rachunek_prad", wiedza_z="2026-05-01")[0]["obiekt"])   # 230 zł
+for h in m.historia("anna", "rachunek_prad", "kwota"): print(h)
 ```
 
 ---
@@ -437,7 +437,7 @@ Zbuduj 60 pytań w czterech kategoriach po 15:
 | Kategoria | Przykład | Co mierzy |
 | :-- | :-- | :-- |
 | **A · stan aktualny** | „Ile płacę za prąd?" | wyszukanie |
-| **B · stan historyczny** | „Ile płaciłem w kwietniu?" | ⭐ czas świata |
+| **B · stan historyczny** | „Ile płaciłam w kwietniu?" | ⭐ czas świata |
 | **C · zmiana** | „Czy rachunek się zmienił? Kiedy?" | ⭐ oś czasu |
 | **D · odmowa** | „Jaki mam numer buta?" (nigdy nie podany) | ⭐ **„nie wiem"** |
 
@@ -450,13 +450,13 @@ w praktyce.** System pamięci, który na nieznane pytanie zwraca najbliższy fak
 ```python
 # historia.py — 8 miesięcy życia z 12 zmianami faktów
 ZDARZENIA = [
-  ("2026-01-10", "rachunek_prad", "kwota", "210 zł"),
-  ("2026-03-01", "rachunek_prad", "kwota", "280 zł"),
-  ("2026-07-01", "rachunek_prad", "kwota", "245 zł"),
+  ("2026-01-10", "rachunek_prad", "kwota", "190 zł"),
+  ("2026-03-01", "rachunek_prad", "kwota", "230 zł"),
+  ("2026-07-01", "rachunek_prad", "kwota", "205 zł"),
   ("2026-02-14", "auto",          "marka", "Skoda Octavia"),
   ("2026-08-20", "auto",          "marka", "Toyota Corolla"),
   ("2026-01-05", "preferencje",   "format_odpowiedzi", "krótko, bez wstępów"),
-  ("2026-05-30", "praca",         "projekt", "suwerenny agent"),
+  ("2026-05-30", "praca",         "projekt", "planer ogrodu"),
   # … dopisz do 12
 ]
 ```
@@ -530,7 +530,7 @@ Twoja maszyna i tak stoi; niech pracuje.
 
 | ID | Pułapka | Objaw | Jak uniknąć |
 | :-- | :-- | :-- | :-- |
-| **P77** | **Nadpisywanie faktu zamiast unieważniania** | Agent nie umie odpowiedzieć „ile płaciłem w kwietniu" i nie wiesz, kiedy dane się zmieniły | Żadnego `DELETE` ani `UPDATE obiekt`. Zawsze `wazny_do` + nowy wiersz |
+| **P77** | **Nadpisywanie faktu zamiast unieważniania** | Agent nie umie odpowiedzieć „ile płaciłam w kwietniu" i nie wiesz, kiedy dane się zmieniły | Żadnego `DELETE` ani `UPDATE obiekt`. Zawsze `wazny_do` + nowy wiersz |
 | **P78** | **Mylenie czasu świata z czasem systemu** | Nie odróżniasz „agent się pomylił" od „agent miał stare dane" | Cztery znaczniki, nie dwa. `wazny_*` ≠ `zapisany`/`uniewazniony` |
 | **P79** | **Fakt bez cytatu i źródła** | Nie da się sprawdzić, skąd agent to wie; halucynacja wygląda jak pamięć | `cytat` obowiązkowy, weryfikowany przez występowanie w źródle |
 | **P80** | **Brak zakresu — pamięć przecieka między agentami** | Badacz widzi fakty Archiwisty; w produkcie: sprawa A wycieka do sprawy B | `zakres` w kluczu każdego zapytania. **Nigdy zapytania bez zakresu** |

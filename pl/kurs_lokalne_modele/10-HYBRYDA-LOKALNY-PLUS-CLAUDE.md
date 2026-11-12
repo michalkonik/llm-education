@@ -502,7 +502,7 @@ agenta działającego offline na Twoim sprzęcie.
    Wszystko inne bez tego jest zgadywaniem.
 2. **Uruchom agenta na prawdziwym zadaniu księgowym** i zapisz, gdzie zawodzi.
 3. **Napraw harness, nie prompt** — to jest lekcja części 6.
-4. **Dołóż karty 3 i 4** (`KARTY-3-I-4-PLAN-PODLACZENIA.md`) i uruchom `gpt-oss-120b`.
+4. **Jeśli dołożysz kolejne karty**, przemapuj je w `rig-env.sh` (indeks kursu) i uruchom większy model, np. `gpt-oss-120b`.
 5. **Zmierz wszystko ponownie.**
 
 ⭐ **Najważniejsze, co wynosisz z tego kursu, to nie kod.** To jest umiejętność

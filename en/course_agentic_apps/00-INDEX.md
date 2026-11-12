@@ -1,8 +1,8 @@
 # Course 2: agentic applications on local models — index
 
-**Created 23 September 2026. For Michał.**
-A continuation of course 1 — `00-COURSE-INDEX.md`, parts 1–10
-(on the Mac one level up, on the machine in `../course_local_models/`).
+**Created 23 September 2026.**
+A continuation of course 1 — [`../course_local_models/00-COURSE-INDEX.md`](../course_local_models/00-COURSE-INDEX.md),
+parts 1–10.
 
 > **Purpose of the whole thing.** After this course you **design and maintain agentic systems**, rather than
 > merely running an agent. You build one growing system — `$OSA/` — and on top of it you stand up
@@ -150,7 +150,7 @@ expect to see — and an **empty table** for your result. When they diverge,
    never the first.
 6. **Every decision gets an ADR** with a falsification condition:
    *"how will I know this was a bad decision"*.
-7. **Pitfalls are numbered on from course 1.** Hardware P1–P18 (`TECHNIKA.md`),
+7. **Pitfalls are numbered on from course 1.** Hardware P1–P18 (pitfalls of the reference rig),
    software in course 1: P20–P52, **course 2: P60–P139**.
 
 ---
@@ -169,7 +169,7 @@ expect to see — and an **empty table** for your result. When they diverge,
 ## Before you start
 
 ```bash
-cd ~/Desktop/github_repos/llm-education   # the repository directory (yours may differ)
+cd ~/llm-education   # the repository directory (yours may differ)
 source rig-env.sh
 $LB/llama-cli --version                     # expect: a build from commit 987498f
 rocm-smi --showid                           # 2× R9700 + iGPU as GPU[2]
@@ -280,13 +280,12 @@ Eighty pitfalls. Each has its symptom and remedy in its own part.
 
 | Path | Role |
 | :-- | :-- |
-| `kurs2/00-INDEX.md` | this file — the map and the pitfall registry |
-| `kurs2/01`–`19` | the parts of the course, in order |
-| `kurs2/SOURCES.md` | **the annotated bibliography** — what was taken from what and where it was used |
-| `kurs2/skeleton/` | the starter skeleton of `$OSA/` to copy |
-| `00-COURSE-INDEX.md` | ⬅️ **course 1** — the model from the inside. Mac: `../`, machine: `../course_local_models/` |
-| `TECHNIKA.md` (one level up) | procedures on this machine, hardware pitfalls P1–P18 |
-| `HANDOFF.md` (one level up) | the state of the project |
+| `00-INDEX.md` | this file — the map and the pitfall registry |
+| `01`–`19` | the parts of the course, in order |
+| [`SOURCES.md`](SOURCES.md) | **the annotated bibliography** — what was taken from what and where it was used |
+| [`skeleton/`](skeleton/) | the starter skeleton of `$OSA/` to copy |
+| [`../course_local_models/00-COURSE-INDEX.md`](../course_local_models/00-COURSE-INDEX.md) | ⬅️ **course 1** — the model from the inside |
+| `../../rig-env.sh` | paths to models and binaries, visible cards |
 
 **What will come into being along the way:**
 

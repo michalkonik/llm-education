@@ -2,14 +2,15 @@
 
 English version: [README.md](README.md)
 
-**Po polsku: dwa kursy o tym, jak naprawdę działają lokalne modele językowe i jak zbudować wokół nich agenta,
-któremu można zaufać — oraz przegląd gotowych harnessów agentowych.**
+**Po polsku: trzy kursy o tym, jak naprawdę działają lokalne modele językowe, jak zbudować wokół nich agenta,
+któremu można zaufać, i jak go zabezpieczyć — oraz przegląd gotowych harnessów agentowych.**
 
 > **Struktura:** treść po polsku jest w [`pl/`](pl/), wersja angielska w [`en/`](en/).
 
 ![Język: polski](https://img.shields.io/badge/język-polski-red)
 ![Kurs 1: 10 części, ~47 h](https://img.shields.io/badge/kurs%201-10%20części%20·%20~47%20h-blue)
 ![Kurs 2: 19 części, ~102 h](https://img.shields.io/badge/kurs%202-19%20części%20·%20~102%20h-blue)
+![Kurs 3: 15 części, ~77 h](https://img.shields.io/badge/kurs%203-15%20części%20·%20~77%20h-blue)
 ![Przegląd: 20 harnessów agentowych](https://img.shields.io/badge/przegląd-20%20harnessów%20agentowych-orange)
 ![Przegląd: 15 asystentów AI](https://img.shields.io/badge/przegląd-15%20asystentów%20AI-orange)
 ![Licencja: CC BY 4.0 + MIT](https://img.shields.io/badge/licencja-CC%20BY%204.0%20%2B%20MIT-lightgrey)
@@ -63,6 +64,23 @@ budzą się sami, pamiętają, są mierzeni i nie mogą zrobić Ci krzywdy:
 
 ⚠️ **Kurs 2 zaczynaj dopiero po części 6 kursu 1** — cały stoi na pętli agenta, którą tam budujesz.
 
+### Kurs 3 — [bezpieczeństwo LLM, aplikacji agentowych i modeli lokalnych](pl/kurs_bezpieczenstwo_llm/00-INDEKS.md) (`pl/kurs_bezpieczenstwo_llm/`)
+
+Kursy 1 i 2 uczą budować. Kurs 3 uczy, **jak to, co zbudowałeś, jest atakowane i jak sprawić, żeby wytrzymało**:
+od modelu zagrożeń, przez to, dlaczego model nie odróżnia instrukcji od danych, aż do tokenów, formatów plików
+i otwartych portów. Atakujesz celowo dziurawego asystenta **Sieve** w laboratorium na 127.0.0.1, mierzysz
+skuteczność ataku, dodajesz obronę i mierzysz ponownie. Kurs jest obronny: nieszkodliwe kanarki, tylko własne systemy.
+
+| Blok | Części | Tematy |
+|---|---|---|
+| Podstawy | 01–03 | krajobraz i modelowanie zagrożeń, **laboratorium i ASR**, mechanika ataków |
+| Sam model | 04–05 | jailbreaki i dlaczego alignment to nie granica, bezpośredni injection i wycieki promptu |
+| Aplikacja wokół modelu | 06–09 | **pośredni injection i zatruwanie RAG**, **agenci i eksfiltracja**, MCP / skille / pamięć, obsługa wyjścia i zasoby |
+| Modele, dane, infrastruktura | 10–12 | łańcuch dostaw modeli (pickle, GGUF, szablony), prywatność, wystawione serwery lokalne |
+| Obrona jako inżynieria | 13–15 | guardrale i red teaming, wykrywanie i reagowanie na incydenty, capstone |
+
+⚠️ **Kurs 3 zaczynaj po części 6 kursu 1**; części 06–09 zakładają pomysły z kursu 2: narzędzia, pamięć i piaskownicę.
+
 ### Przegląd — [harnessy agentowe dla lokalnych modeli](pl/harnessy-agentowe/README.md) (`pl/harnessy-agentowe/`)
 
 Kursy uczą budować od zera. Przegląd odpowiada na pytanie, **co już istnieje**: ranking 20 najlepszych otwartych
@@ -93,6 +111,129 @@ dla polskich profesjonalistów, którzy nie mogą wysyłać danych do USA. Stan 
 | [04-POLSKA-I-SUWERENNOSC](pl/asystenci-ai/04-POLSKA-I-SUWERENNOSC.md) | RODO, AI Act, tajemnice zawodowe, konkurencja w Polsce i UE, polskie modele, sprzęt, szanse |
 | [ZRODLA](pl/asystenci-ai/ZRODLA.md) | źródła z datą sprawdzenia |
 
+### Praktyka — [przyspieszanie generowania tokenów](pl/przyspieszanie-generowania/README.md) (`pl/przyspieszanie-generowania/`)
+
+Jak przyspieszyłem DeepSeek-V4-Flash z 23,5 do ok. 50 tok/s dla jednego agenta na 4× R9700, nie ruszając modelu: **speculative decoding** z własną głowicą draftu modelu
+oraz **podział tensorowy** na czterech kartach — i procedura, jak zrobić to samo z każdym modelem, który pobiorę w przyszłości. Zmierzone, z porażkami włącznie.
+Stan na 19 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/przyspieszanie-generowania/README.md) | wynik w jednej tabeli, trzy dźwignie, co jest zmierzone, a co nie |
+| [01-JAK-TO-DZIALA](pl/przyspieszanie-generowania/01-JAK-TO-DZIALA.md) | lekcja: dlaczego generowanie jest wolne, jak działa speculative decoding i podział tensorowy, odmiany |
+| [02-WDROZENIE-DEEPSEEK](pl/przyspieszanie-generowania/02-WDROZENIE-DEEPSEEK.md) | studium przypadku: każdy krok, każdy pomiar, konfiguracja końcowa, pułapki |
+| [03-PROCEDURA-NOWY-MODEL](pl/przyspieszanie-generowania/03-PROCEDURA-NOWY-MODEL.md) | instrukcja dla kolejnego modelu: drzewo decyzyjne, polecenia, bramki, kryteria |
+| [04-UZYTKOWANIE-UI-CLI-OPENCLAW](pl/przyspieszanie-generowania/04-UZYTKOWANIE-UI-CLI-OPENCLAW.md) | rozmowa z szybkim modelem: przeglądarka, terminal, aplikacje agentowe |
+| [05-ODNIESIENIE-LLAMA-CPP-SPECULATIVE](pl/przyspieszanie-generowania/05-ODNIESIENIE-LLAMA-CPP-SPECULATIVE.md) | dokumentacja llama.cpp po polsku — przekład wykonany lokalnym DeepSeekiem, ze zweryfikowanymi poprawkami |
+| [narzedzia/](pl/przyspieszanie-generowania/narzedzia/README.md) | skrypty: inspekcja GGUF, szukanie draftów, benchmarki, czat w terminalu |
+
+### Poradnik — [agenty samodoskonalące się bez regresji](pl/agenty-samodoskonalace/README.md) (`pl/agenty-samodoskonalace/`)
+
+Jak zbudować agenta, który przez tygodnie pracy poprawia własny playbook, pamięć albo skille, nie psując po cichu wersji, która
+już działała — i jak sprawić, żeby sam rozpoznał, że jest wystarczająco dobry, i przestał się zmieniać. Przegląd ponad 30
+systemów samodoskonalących się i ich porażek, statystyka rzadkich wyników (dlaczego kilka pustych rund niczego nie dowodzi)
+i architektura do zbudowania: zamrożony oceniający, edycje deltami, jedna zmiana naraz, kaskada bramek, tryb cienia, bandyta,
+wartownik i automatyczne wycofanie. Research biurkowy z oznaczeniem siły dowodów i kalkulator w samej bibliotece standardowej.
+Stan na 29 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/agenty-samodoskonalace/README.md) | problem, przykład przewodni, 15 zasad, co budujesz |
+| [01-CO-MOZNA-ULEPSZAC](pl/agenty-samodoskonalace/01-CO-MOZNA-ULEPSZAC.md) | przegląd: co każdy system zmienia, jak ocenia, co go chroni, jak zawiódł |
+| [02-POMIAR-PRZY-RZADKICH-ZDARZENIACH](pl/agenty-samodoskonalace/02-POMIAR-PRZY-RZADKICH-ZDARZENIACH.md) | puste serie, ile trafień na zmianę, testy dokładne, SPRT, CUSUM, klątwa zwycięzcy |
+| [03-BEZPIECZNA-PETLA](pl/agenty-samodoskonalace/03-BEZPIECZNA-PETLA.md) | komponenty, drzwi zmian, zamrożone zasoby do oceny, delty, bramki, tryb cienia, bandyta, wycofanie |
+| [04-KIEDY-PRZESTAC](pl/agenty-samodoskonalace/04-KIEDY-PRZESTAC.md) | wyzwalacze oparte na dowodach, okres próbny, rosnące przerwy, tryb utrzymania, cykl życia w kodzie |
+| [05-PULAPKI](pl/agenty-samodoskonalace/05-PULAPKI.md) | 25 porażek w kolejności, w jakiej je spotkasz |
+| [ZRODLA](pl/agenty-samodoskonalace/ZRODLA.md) | źródła z datą sprawdzenia i dokładnością weryfikacji |
+| [narzedzia/](pl/agenty-samodoskonalace/narzedzia/README.md) | `rare_event_stats.py`: arytmetyka dla tempa trafień Twojego agenta |
+
+### Poradnik — zarabianie wokół GTA 6 (przeniesiony)
+
+Ten poradnik jest teraz w repozytorium [financial-education](https://github.com/michal-koniu/financial-education),
+obok kursu praktycznej makroekonomii dla inwestorów: po polsku `pl/gta6-mozliwosci-zarobku/`, po angielsku `en/gta6-income-options/`.
+
+### Przegląd — [silniki lokalnych LLM: od mapy do kodu źródłowego](pl/silniki-lokalnych-llm/README.md) (`pl/silniki-lokalnych-llm/`)
+
+Czym są llama.cpp, Ollama, LM Studio, vLLM, SGLang, MLX i oMLX, ds4, llmman i kilkanaście innych programów do uruchamiania modeli na własnym sprzęcie, co robią w środku,
+do czego służą i czym się różnią — od mapy rynku po struktury danych w kodzie. Plus jeden rozdział nietechniczny: jak zarabiają i kto za nimi stoi.
+Research biurkowy i lektura kodu, bez własnych pomiarów. Stan na 19 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/silniki-lokalnych-llm/README.md) | mapa kursu, dziesięć niespodzianek, jak czytać |
+| [01-MAPA-I-WARSTWY](pl/silniki-lokalnych-llm/01-MAPA-I-WARSTWY.md) | siedem warstw od pliku z wagami do okna czatu, tabele projektów, sieć zależności, oś czasu |
+| [02-JAK-DZIALA-INFERENCJA](pl/silniki-lokalnych-llm/02-JAK-DZIALA-INFERENCJA.md) | prefill i dekodowanie, KV cache, MoE, batching, równoległość, spekulacja, próbkowanie, słowniczek |
+| [03-KWANTYZACJA-I-FORMATY](pl/silniki-lokalnych-llm/03-KWANTYZACJA-I-FORMATY.md) | co jest w pliku GGUF, rodziny kwantyzacji, tabele jakości, analiza pliku DeepSeek |
+| [04-LLAMA-CPP-I-RODZINA-GGML](pl/silniki-lokalnych-llm/04-LLAMA-CPP-I-RODZINA-GGML.md) | ggml, GGUF, `llama-server` od środka, tryby podziału na wiele GPU, HIP; ik_llama.cpp, llamafile, llama-swap |
+| [05-OPAKOWANIA-OLLAMA-LM-STUDIO-I-INNE](pl/silniki-lokalnych-llm/05-OPAKOWANIA-OLLAMA-LM-STUDIO-I-INNE.md) | Ollama, LM Studio, llmman, Jan, LocalAI, Lemonade, Docker Model Runner, RamaLama |
+| [06-SILNIKI-SERWEROWE-VLLM-SGLANG](pl/silniki-lokalnych-llm/06-SILNIKI-SERWEROWE-VLLM-SGLANG.md) | vLLM, SGLang, TensorRT-LLM, TGI; status na AMD gfx1201 |
+| [07-APPLE-MLX-OMLX-I-DS4](pl/silniki-lokalnych-llm/07-APPLE-MLX-OMLX-I-DS4.md) | pamięć zunifikowana, MLX, mlx-lm, oMLX, ds4, exo |
+| [08-SPECJALISCI-KTRANSFORMERS-I-INNE](pl/silniki-lokalnych-llm/08-SPECJALISCI-KTRANSFORMERS-I-INNE.md) | KTransformers, mistral.rs, MLC, stosy NPU |
+| [09-POROWNANIE-I-WYBOR](pl/silniki-lokalnych-llm/09-POROWNANIE-I-WYBOR.md) | macierz, scenariusze, co działa na gfx1201, eksperymenty |
+| [10-PIENIADZE-I-LUDZIE](pl/silniki-lokalnych-llm/10-PIENIADZE-I-LUDZIE.md) | **nietechniczny:** modele biznesowe, finansowanie, ludzie, licencje, ryzyka |
+| [ZRODLA](pl/silniki-lokalnych-llm/ZRODLA.md) | źródła, przypięte commity, najsłabiej zweryfikowane punkty |
+
+### Przegląd — [tanie i darmowe modele online dla agentów](pl/tanie-i-darmowe-modele/README.md) (`pl/tanie-i-darmowe-modele/`)
+
+Trzecia noga obok czołowych API i modeli lokalnych: gdzie zdobyć inferencję online za niewielkie pieniądze albo za darmo
+na modelach co najmniej tak mądrych jak lokalny DeepSeek-V4-Flash i na ile można jej ufać w pętli agenta. 20 najlepszych
+tras, które modele naprawdę przekraczają poprzeczkę i jak podłączyć je do aplikacji agentowych. Stan na 13 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/tanie-i-darmowe-modele/README.md) | krótka odpowiedź, ranking 20 tras, punktacja, która trasa do jakiego zadania |
+| [01-PROFILE](pl/tanie-i-darmowe-modele/01-PROFILE.md) | 20 profili: ceny, limity, warunki, jak wywołać każdą trasę |
+| [02-MODELE](pl/tanie-i-darmowe-modele/02-MODELE.md) | które modele są naprawdę co najmniej tak mądre jak DeepSeek-V4-Flash, na jednej wersji indeksu |
+| [03-UZYCIE-W-AGENTACH](pl/tanie-i-darmowe-modele/03-UZYCIE-W-AGENTACH.md) | konfiguracja routera LiteLLM, limity darmowych planów, rachunek kosztów, pułapki jakości, 15-minutowy test akceptacyjny |
+| [ZRODLA](pl/tanie-i-darmowe-modele/ZRODLA.md) | źródła z datą sprawdzenia |
+
+### Przegląd — [asymetrie zarobkowe z AI](pl/asymetrie-zarobkowe-ai/README.md) (`pl/asymetrie-zarobkowe-ai/`)
+
+Gdzie aplikacja agentowa na konfiguracji hybrydowej może zarabiać online bez zakładania firmy: 22 kandydatów (bounty,
+konkursy, rynki predykcyjne, arbitraż, płatna praca ręczna, wynajem mocy obliczeniowej i inne), każdy sprawdzony pod
+kątem tego, czy wciąż płaci się za ręczną pracę, którą agenty mogą dziś wykonać szybciej. Legalność i podatki sprawdzone
+dla polskiego rezydenta. Stan na 14 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/asymetrie-zarobkowe-ai/README.md) | krótka odpowiedź, 10 najlepszych, punktacja, od czego zacząć, odrzuceni kandydaci |
+| [01-OKAZJE](pl/asymetrie-zarobkowe-ai/01-OKAZJE.md) | 10 najlepszych okazji, profil po profilu |
+| [02-ARCHITEKTURA-HYBRYDOWA](pl/asymetrie-zarobkowe-ai/02-ARCHITEKTURA-HYBRYDOWA.md) | jeden wzorzec agenta hybrydowego: routing lokalnie czy płatnie, rachunek kosztów, zabezpieczenia |
+| [03-ZASADY-PODATKI-RYZYKA](pl/asymetrie-zarobkowe-ai/03-ZASADY-PODATKI-RYZYKA.md) | polskie podatki, raportowanie, zasady hazardu i pracy security, regulaminy platform, ryzyka operacyjne |
+| [ZRODLA](pl/asymetrie-zarobkowe-ai/ZRODLA.md) | źródła z datą sprawdzenia |
+
+### Przegląd — [asymetrie biznesowe AI](pl/asymetrie-biznesowe-ai/README.md) (`pl/asymetrie-biznesowe-ai/`)
+
+Gdzie adopcja AI jest wciąż na tyle niska, że mały zespół z aplikacjami agentowymi i lokalnymi otwartymi modelami może
+zbudować biznes, zanim dogonią go obecni gracze: 26 kandydatów w Polsce, w UE i na rynkach globalnych, każdy przed
+oceną zaatakowany z pięciu stron. Stan na 14 października 2026.
+
+| Plik | Co w nim jest |
+|---|---|
+| [README](pl/asymetrie-biznesowe-ai/README.md) | krótka odpowiedź, 15 najlepszych, punktacja, kontrargumenty, od czego zacząć |
+| [01-LUKI-ADOPCJI](pl/asymetrie-biznesowe-ai/01-LUKI-ADOPCJI.md) | gdzie adopcja AI jest wciąż niska: dane Eurostatu i GUS według kraju, wielkości i sektora |
+| [02-OKAZJE](pl/asymetrie-biznesowe-ai/02-OKAZJE.md) | 15 najlepszych okazji, profil po profilu |
+| [03-NAJPIERW-LOKALNIE](pl/asymetrie-biznesowe-ai/03-NAJPIERW-LOKALNIE.md) | dlaczego kupujący chcą lokalnie, wystarczające otwarte modele, klasy sprzętu, koszt lokalnie vs API |
+| [ZRODLA](pl/asymetrie-biznesowe-ai/ZRODLA.md) | źródła z datą sprawdzenia |
+
+### Ścieżka biznesowa — [wycena prywatnego AI boxa](pl/kurs_wycena_ai_box/00-INDEKS.md) (`pl/kurs_wycena_ai_box/`)
+
+Cennik lokalnego AI boxa dla polskich kancelarii i biur, w którym każda liczba ma źródło: podłoga kosztowa, sufit
+wartości dla kancelarii, katalog agentów eksperckich jako silnik wzrostu, cztery modele sprzętowe i Twoja gotówka,
+rozmowy o gotowości do zapłaty po polsku i to, jak cennik wygląda w oczach inwestora. Z kalkulatorem w samej
+bibliotece standardowej (`floor`, `value`, `cash`, `vw`, `gg`, `nrr`). Stan na 25 października 2026.
+
+| Część | Temat | Co powstaje |
+|---|---|---|
+| [01](pl/kurs_wycena_ai_box/01-PODSTAWY-WYCENY.md) | Podstawy | cena „z brzucha” zapisana z góry, trzy kotwice |
+| [02](pl/kurs_wycena_ai_box/02-PODLOGA-KOSZTOWA.md) | Podłoga kosztowa | COGS na jedno biuro, docelowa marża |
+| [03](pl/kurs_wycena_ai_box/03-SUFIT-WARTOSCI.md) | Sufit wartości | wartość ekonomiczna dla trzech biur, pierwszy klient docelowy |
+| [04](pl/kurs_wycena_ai_box/04-METRYKA-WARTOSCI-I-PAKIETY.md) | Metryka wartości | katalog agentów, pakiety dobry / lepszy / najlepszy |
+| [05](pl/kurs_wycena_ai_box/05-SPRZET-I-GOTOWKA.md) | Sprzęt i gotówka | model sprzętowy i Twoje zapotrzebowanie na gotówkę |
+| [06](pl/kurs_wycena_ai_box/06-GOTOWOSC-DO-ZAPLATY.md) | Gotowość do zapłaty | zestaw do wywiadów, Van Westendorp, płatny pilotaż |
+| [07](pl/kurs_wycena_ai_box/07-CENNIK-I-WARUNKI.md) | Cennik | `price-book-v1.md` z rabatami i warunkami |
+| [08](pl/kurs_wycena_ai_box/08-WYCENA-POD-SKALE-I-INWESTOROW.md) | Skala | ARR, NRR i decyzja: bootstrapping czy VC |
+
 ---
 
 ## Jak zacząć
@@ -104,11 +245,12 @@ source rig-env.sh        # ustawia ścieżki kursów, modeli i llama.cpp
 ```
 
 Potem otwórz [część 1 kursu 1](pl/kurs_lokalne_modele/PODSTAWY-LOKALNYCH-MODELI.md). Każda lekcja zaczyna się od
-`source rig-env.sh` w katalogu repozytorium — w poleceniach lekcji stoi moja ścieżka
-(`~/Desktop/github_repos/llm-education`), u Ciebie może być inna.
+`source rig-env.sh` w katalogu repozytorium — polecenia lekcji zakładają, że repozytorium leży w `~/llm-education`;
+jeśli u Ciebie jest gdzie indziej, dostosuj ścieżkę.
 
 **Dostosuj `rig-env.sh` do swojej maszyny:** ścieżki do modeli (`$M`, `$BIELIK`, …), do llama.cpp (`$LB`)
-i widoczne karty (`HIP_VISIBLE_DEVICES`).
+i widoczne karty (`HIP_VISIBLE_DEVICES`). To szablon: zmień wartości domyślne na górze pliku albo ustaw te zmienne
+w powłoce przed `source rig-env.sh`.
 
 ## Gdzie powstają pliki
 
@@ -130,7 +272,9 @@ Wszystko, co tworzą kursy, powstaje **wewnątrz repozytorium**, w katalogach ig
 - **sekrety** (`~/.config/osa/sekrety.json`, prawa 0600) — sekretów nie trzyma się w repozytorium,
   nawet ignorowanym;
 - **gniazdo** (`~/.local/run/osa.sock`) — ścieżka gniazda ma limit 108 znaków;
-- **Twoje dane**, na których pracują agenci (`~/dokumenty`, `~/skany`) — to Twoje pliki, nie wytwory kursu.
+- **Twoje dane**, na których pracują agenci (`~/dokumenty`, `~/skany`) — to Twoje pliki, nie wytwory kursu;
+- **folder roboczy ścieżki biznesowej** (`~/founder/`) — notatki o cenach i dane prawdziwych klientów są prywatne
+  i nie trafiają do publicznego repozytorium.
 
 ## Sprzęt i oprogramowanie
 
@@ -160,8 +304,9 @@ Wszystko, co tworzą kursy, powstaje **wewnątrz repozytorium**, w katalogach ig
 
 ## Licencja
 
-Treść lekcji: **CC BY 4.0** — możesz kopiować, zmieniać i wykorzystywać, także komercyjnie, podając autora.
-Kod (fragmenty w lekcjach, `rig-env.sh`, `szkielet/`): **MIT**. Szczegóły: [LICENSE.md](LICENSE.md).
+Licencja obejmuje całe repozytorium: cała treść (lekcje, przeglądy, poradniki - każdy plik `*.md`, w obu językach) na
+**CC BY 4.0** — możesz kopiować, zmieniać i wykorzystywać, także komercyjnie, podając autora. Cały kod (skrypty,
+`rig-env.sh`, `szkielet/`, `narzedzia/`, `tools/`, fragmenty w lekcjach): **MIT**. Szczegóły: [LICENSE.md](LICENSE.md).
 
 Znalazłeś błąd albo Twój pomiar mówi co innego niż lekcja? Otwórz zgłoszenie (issue) — właśnie po to
 lekcje mają tabele na pomiary.

@@ -1,10 +1,10 @@
 # Local models from the ground up — a hands-on course
 
 **Created: 20 September 2026.**
-For Michał, for learning "from zero to understanding", **command by command**.
+For learning "from zero to understanding", **command by command**.
 
-> **How this file differs from the others.**
-> `HANDOFF.md` says *what is done*. `TECHNIKA.md` says *how to carry out a procedure on this
+> **How this file differs from your own notes.**
+> Your project notes say *what is done*; your machine notes say *how to carry out a procedure on that
 > particular machine*. **This file explains how all of it works** — so that you do not run
 > commands from memory, but understand what happens underneath.
 >

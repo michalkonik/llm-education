@@ -577,7 +577,7 @@ you are buying** when you take someone else's.
 4. **Aider vs your agent.** The same coding task on the same model. Compare the number
    of turns, the quality and **what Aider does differently**. Write down three things you will
    borrow from it.
-5. **Define your stack.** Write one table in `HANDOFF.md`: layer → chosen tool →
+5. **Define your stack.** Write one table in your project notes: layer → chosen tool →
    why → what you rejected. **This is the architecture document of your product.**
 
 ---
