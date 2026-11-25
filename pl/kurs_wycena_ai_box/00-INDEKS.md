@@ -1,6 +1,5 @@
 # Kurs: wycena prywatnego AI boxa — indeks
 
-**Utworzono 25 października 2026.**
 Część ścieżki biznesowej. Ten kurs zakłada, że przeczytałeś
 `asymetrie-biznesowe-ai/` (okazja 1, *Prywatny AI box dla polskich kancelarii i biur*) oraz
 `asystenci-ai/02-RYNEK.md`.

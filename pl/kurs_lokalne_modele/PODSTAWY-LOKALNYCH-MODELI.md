@@ -1,6 +1,5 @@
 # Lokalne modele od podstaw — kurs praktyczny
 
-**Utworzony: 20 września 2026.**
 Do nauki „od zera do zrozumienia", **polecenie po poleceniu**.
 
 > **Czym ten plik różni się od Twoich notatek.**
@@ -750,7 +749,6 @@ TOOLS = [{
         },
     },
 }]
-
 
 def zapytaj(messages):
     body = json.dumps({"messages": messages, "tools": TOOLS}).encode()

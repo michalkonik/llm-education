@@ -1,6 +1,5 @@
 # Local models from the ground up — a hands-on course
 
-**Created: 20 September 2026.**
 For learning "from zero to understanding", **command by command**.
 
 > **How this file differs from your own notes.**
@@ -750,7 +749,6 @@ TOOLS = [{
         },
     },
 }]
-
 
 def zapytaj(messages):
     body = json.dumps({"messages": messages, "tools": TOOLS}).encode()

@@ -1,6 +1,5 @@
 # Course 2: agentic applications on local models — index
 
-**Created 23 September 2026.**
 A continuation of course 1 — [`../course_local_models/00-COURSE-INDEX.md`](../course_local_models/00-COURSE-INDEX.md),
 parts 1–10.
 

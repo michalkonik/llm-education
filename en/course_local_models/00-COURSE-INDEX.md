@@ -1,7 +1,5 @@
 # Course: from a model to your own agent — index
 
-**Created: 22 September 2026.**
-
 > **Purpose of the whole thing.** After working through this course you can **build from scratch
 > your own agent in the OpenClaw / Claude Code class** — a loop that reads files, writes code,
 > runs commands, sees images, listens and speaks, remembers context and **works offline on your
