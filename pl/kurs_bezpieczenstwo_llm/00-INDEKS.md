@@ -1,6 +1,5 @@
 # Kurs 3: bezpieczeństwo LLM, aplikacji agentowych i modeli lokalnych — indeks
 
-**Utworzony 28 października 2026.**
 Kontynuacja kursu 1 — [`../kurs_lokalne_modele/00-KURS-INDEKS.md`](../kurs_lokalne_modele/00-KURS-INDEKS.md) —
 i kursu 2 — [`../kurs_aplikacje_agentowe/00-INDEKS.md`](../kurs_aplikacje_agentowe/00-INDEKS.md).
 

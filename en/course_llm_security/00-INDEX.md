@@ -1,6 +1,5 @@
 # Course 3: security of LLMs, agentic apps and local models — index
 
-**Created 28 October 2026.**
 A continuation of course 1 — [`../course_local_models/00-COURSE-INDEX.md`](../course_local_models/00-COURSE-INDEX.md) —
 and course 2 — [`../course_agentic_apps/00-INDEX.md`](../course_agentic_apps/00-INDEX.md).
 

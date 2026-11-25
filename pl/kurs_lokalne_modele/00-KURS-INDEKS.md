@@ -1,7 +1,5 @@
 # Kurs: od modelu do własnego agenta — indeks
 
-**Utworzony: 22 września 2026.**
-
 > **Cel całości.** Po przejściu tego kursu potrafisz **zbudować od zera własnego agenta
 > klasy OpenClaw / Claude Code** — pętlę, która czyta pliki, pisze kod, uruchamia polecenia,
 > widzi obrazy, słucha i mówi, pamięta kontekst i **działa offline na Twoim sprzęcie** —

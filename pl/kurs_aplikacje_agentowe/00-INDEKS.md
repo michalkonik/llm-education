@@ -1,6 +1,5 @@
 # Kurs 2: aplikacje agentowe na modelach lokalnych — indeks
 
-**Utworzony 23 września 2026.**
 Kontynuacja kursu 1 — [`../kurs_lokalne_modele/00-KURS-INDEKS.md`](../kurs_lokalne_modele/00-KURS-INDEKS.md),
 części 1–10.
 

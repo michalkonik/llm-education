@@ -1,6 +1,5 @@
 # Course: Pricing a private AI box — index
 
-**Created 25 October 2026.**
 Part of the business track. This course assumes you have read
 `ai-business-asymmetries/` (opportunity 1, *Private AI box for Polish professional offices*) and
 `ai-assistants/02-MARKET.md`.
